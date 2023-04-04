@@ -6,7 +6,7 @@
 
     <!-- Bottom border -->
     <item
-        android:bottom="2dp"
+        android:bottom="1dp"
         android:drawable="@color/third"/>
 
 </layer-list>
