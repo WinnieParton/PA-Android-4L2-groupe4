@@ -1,6 +1,9 @@
 package com.example.pa_android
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -18,5 +21,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+}
+
+fun TextView.applyUnderlineText(text: String){
+    if(text!=null) {
+        val spannable = SpannableString(text)
+        spannable.setSpan(UnderlineSpan(), 0, text.length, 0)
+        setText(spannable)
     }
 }

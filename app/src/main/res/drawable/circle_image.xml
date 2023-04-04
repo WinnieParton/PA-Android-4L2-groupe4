@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="25dp" android:height="25dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/primary" />
+        </shape>
+    </item>
+    <item  android:gravity="center">
+        <bitmap android:src="@drawable/ic_signup" android:gravity="center" />
+    </item>
+</layer-list>

@@ -1,30 +1,71 @@
 package com.example.pa_android
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-
+import androidx.navigation.fragment.findNavController
+import android.view.View.OnTouchListener
+import androidx.core.content.ContextCompat
 
 class LoginFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
+
+        view.findViewById<TextView>(R.id.forget_password_text).applyUnderlineText(getString(R.string.forget_password))
+        view.findViewById<TextView>(R.id.signup_text).applyUnderlineText(getString(R.string.not_account))
+
+        view.findViewById<TextView>(R.id.forget_password_text).setOnClickListener {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment()
+            )
+        }
+        view.findViewById<TextView>(R.id.signup_text).setOnClickListener {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToSignupFragment()
+            )
+        }
+
+        return view
     }
 
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val editText = view.findViewById<EditText>(R.id.password)
+        editText.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val drawable = editText.compoundDrawablesRelative[2] // Index 2 is for end drawable
+                if (drawable != null && event.rawX >= editText.right - drawable.bounds.width()) {
+                    // Clicked on drawableEnd
+                    findNavController().navigate(
+                        LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                    )
+                    true
+                } else {
+                    false
+                }
+            } else {
+                false
+            }
+        }
     }
 }
