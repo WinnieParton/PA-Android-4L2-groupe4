@@ -1,15 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PA-Android</string>
-    <!-- Strings related to login -->
-    <string name="name_account">Nom de compte</string>
-    <string name="email">Votre adresse email</string>
-    <string name="name_password">Mot de passe</string>
-    <string name="password">Votre mot de passe</string>
-    <string name="forget_password">Vous avez oublié votre mot de passe ?</string>
-    <string name="invalid_username">Pas encore de comtpe ? Rejoignez-nous !</string>
+    <!-- Login-related strings -->
+    <string name="name_account">Account name</string>
+    <string name="email">Your email address</string>
+    <string name="name_password">Password</string>
+    <string name="password">Your password</string>
+    <string name="forget_password">Forgot your password?</string>
+    <string name="invalid_username">No account yet? Join us!</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">Login failed</string>
-    <string name="not_account">Pas encore de comtpe ? Rejoignez-nous !</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="not_account">No account yet? Join us!</string>
+    <string name="plaholder_pseudo">Your nickname</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="plaholder_confirm_password">Confirm password</string>
+    <string name="title_email">Email</string>
+    <string name="cancel">Cancel</string>
+    <string name="validate">Validate</string>
+    <string name="login_button_text">Get started</string>
+
 </resources>
