@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/spashscreemFragment">
     <fragment
-        android:id="@+id/loaderFragment"
-        android:name="com.example.pa_android.LoaderFragment"
-        android:label="LoaderFragment"
-        tools:layout="@layout/fragment_loader">
+        android:id="@+id/spashscreemFragment"
+        android:name="com.example.pa_android.SplashScreemFragment"
+        android:label="SplashScreemFragment"
+        tools:layout="@layout/fragment_splash_screem">
 
         <action
-            android:id="@+id/action_loaderFragment_to_loginFragment"
+            android:id="@+id/action_spashscreemFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_spashscreemFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
@@ -43,6 +46,9 @@
         <action
             android:id="@+id/action_signupFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

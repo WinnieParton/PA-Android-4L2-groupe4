@@ -23,21 +23,6 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-
-        view.findViewById<TextView>(R.id.forget_password_text).applyUnderlineText(getString(R.string.forget_password))
-        view.findViewById<TextView>(R.id.signup_text).applyUnderlineText(getString(R.string.not_account))
-
-        view.findViewById<TextView>(R.id.forget_password_text).setOnClickListener {
-            findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment()
-            )
-        }
-        view.findViewById<TextView>(R.id.signup_text).setOnClickListener {
-            findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToSignupFragment()
-            )
-        }
-
         return view
     }
 
@@ -49,7 +34,20 @@ class LoginFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.findViewById<TextView>(R.id.forget_password_text_title).applyUnderlineText(getString(R.string.forget_password))
 
+        view.findViewById<TextView>(R.id.signup_text).applyUnderlineText(getString(R.string.not_account))
+
+        view.findViewById<TextView>(R.id.forget_password_text_title).setOnClickListener {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment()
+            )
+        }
+        view.findViewById<TextView>(R.id.signup_text).setOnClickListener {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToSignupFragment()
+            )
+        }
         val editText = view.findViewById<EditText>(R.id.password)
         editText.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
@@ -67,5 +65,6 @@ class LoginFragment : Fragment() {
                 false
             }
         }
+
     }
 }
