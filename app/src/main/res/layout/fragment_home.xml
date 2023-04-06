@@ -1,14 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/email" />
+        android:layout_height="match_parent">
+
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/email" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <!--on below line we are creating a add fab-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/idFABHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/primary"
+                android:contentDescription="@string/app_name"
+                android:padding="4dp"
+                android:src="@drawable/ic_user"
+                android:visibility="gone"
+                app:backgroundTint="@color/white"
+                app:tint="@color/white" />
+
+            <!--on below line we are creating a home fab
+                and setting its visibility to gone-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/idFABSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/third"
+                android:contentDescription="@string/app_name"
+                android:padding="4dp"
+                android:src="@drawable/ic_lock"
+                android:visibility="gone"
+                app:backgroundTint="@color/primary"
+                app:tint="@color/white" />
+
+            <!--on below line we are creating a settings fab
+                and setting its visibility to gone-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/idFABAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="4dp"
+                android:src="@drawable/ic_signup"
+                app:backgroundTint="@color/primary"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>
