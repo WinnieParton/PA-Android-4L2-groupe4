@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">PA-Android</string>
+    <string name="app_desc">Projet annuel Android : GROUPE 4 </string>
+
     <!-- Strings related to login -->
     <string name="name_account">Nom de compte</string>
     <string name="email">Votre adresse email</string>
@@ -17,5 +19,6 @@
     <string name="cancel">Annuler</string>
     <string name="validate">Valider</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="login_button_text">Commencer</string>
+    <string name="login_button_text">Se connecter</string>
+    <string name="signup_button_text">Inscrivez-vous</string>
 </resources>

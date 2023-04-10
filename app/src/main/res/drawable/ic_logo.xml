@@ -1,7 +1,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:width="141dp" android:height="141dp">
         <shape android:shape="oval">
-            <solid android:color="@color/white" />
+            <solid android:color="@color/third" />
         </shape>
     </item>
     <item  android:gravity="center">

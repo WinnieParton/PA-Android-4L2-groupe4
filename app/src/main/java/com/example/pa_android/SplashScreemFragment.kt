@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
@@ -30,9 +31,17 @@ class SplashScreemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        view.findViewById<TextView>(R.id.signup_btton).setBackgroundResource(R.drawable.radius_cancel)
+
         view.findViewById<TextView>(R.id.login_button).setOnClickListener {
             findNavController().navigate(
                 SplashScreemFragmentDirections.actionSpashscreemFragmentToLoginFragment()
+            )
+        }
+
+        view.findViewById<TextView>(R.id.signup_btton).setOnClickListener {
+            findNavController().navigate(
+                SplashScreemFragmentDirections.actionSpashscreemFragmentToSignupFragment()
             )
         }
     }

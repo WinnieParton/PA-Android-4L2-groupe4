@@ -37,6 +37,9 @@
         android:name="com.example.pa_android.ForgetPasswordFragment"
         android:label="ForgetPasswordFragment"
         tools:layout="@layout/fragment_forget_password">
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"

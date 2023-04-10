@@ -6,13 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,92 +19,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/bottomAppBar"
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/bottom_nav_menu"
                 android:layout_gravity="bottom"
                 app:fabCradleMargin="10dp"
                 app:fabCradleRoundedCornerRadius="10dp"
-                app:fabCradleVerticalOffset="10dp">
-
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bottomNavigationView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="16dp"
-                    android:background="@android:color/transparent"
-                    app:menu="@menu/bottom_nav_menu" />
-
-            </com.google.android.material.bottomappbar.BottomAppBar>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/circle_image"
-                app:layout_anchor="@id/bottomAppBar" />
+                app:fabCradleVerticalOffset="10dp"
+                android:background="@drawable/bg_bottom_nav"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <!--on below line we are creating a add fab-->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/idFABHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
-                android:background="@color/primary"
-                android:contentDescription="@string/app_name"
-                android:padding="4dp"
-                android:src="@drawable/ic_user"
-                android:visibility="gone"
-                app:backgroundTint="@color/white"
-                app:tint="@color/white" />
-
-            <!--on below line we are creating a home fab
-                and setting its visibility to gone-->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/idFABSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
-                android:background="@color/third"
-                android:contentDescription="@string/app_name"
-                android:padding="4dp"
-                android:src="@drawable/ic_lock"
-                android:visibility="gone"
-                app:backgroundTint="@color/primary"
-                app:tint="@color/white" />
-
-            <!--on below line we are creating a settings fab
-                and setting its visibility to gone-->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/idFABAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
-                android:background="@color/white"
-                android:contentDescription="@string/app_name"
-                android:padding="4dp"
-                android:src="@drawable/ic_signup"
-                app:backgroundTint="@color/primary"
-                app:tint="@color/white" />
-
-        </LinearLayout>
 
     </RelativeLayout>
 
