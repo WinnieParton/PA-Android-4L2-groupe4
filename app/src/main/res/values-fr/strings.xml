@@ -30,5 +30,5 @@
     <string name="nb_result">Nombre de résultats : </string>
     <string name="no_user">Aucun utilisateur trouvé</string>
     <string name="my_friend">Mes amis</string>
-
+    <string name="my_chat">Chat</string>
 </resources>

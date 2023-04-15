@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
 class UserViewHolder(v: View) : RecyclerView.ViewHolder(v) {
     private val user_name = v.findViewById<TextView>(R.id.user_name)
