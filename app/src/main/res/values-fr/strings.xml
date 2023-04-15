@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">PA-Android</string>
+    <string name="app_desc">Projet annuel Android : GROUPE 4 </string>
+
     <!-- Strings related to login -->
     <string name="name_account">Nom de compte</string>
     <string name="email">Votre adresse email</string>
     <string name="name_password">Mot de passe</string>
     <string name="password">Votre mot de passe</string>
     <string name="forget_password">Vous avez oublié votre mot de passe ?</string>
-    <string name="invalid_username">Pas encore de comtpe ? Rejoignez-nous !</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">Login failed</string>
     <string name="not_account">Pas encore de comtpe ? Rejoignez-nous !</string>
     <string name="plaholder_pseudo">Votre pseudo</string>
     <string name="confirm_password">Confirmez le mot de passe</string>
@@ -16,6 +15,20 @@
     <string name="title_email">Email</string>
     <string name="cancel">Annuler</string>
     <string name="validate">Valider</string>
+    <string name="login_button_text">Se connecter</string>
+    <string name="signup_button_text">Inscrivez-vous</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="login_button_text">Commencer</string>
+
+    <string name="name_profil">Mary Smith</string>
+    <string name="phone_profil">SMS: 415-555-789</string>
+    <string name="number_friend">Friends</string>
+    <string name="number_message">Messages</string>
+    <string name="place_holder_search">Rechercher un utilisateur…</string>
+    <string name="item_name_cat">Oil, spray paint</string>
+    <string name="read_more_game">Voir plus</string>
+    <string name="item_name_game">King Grin</string>
+    <string name="nb_result">Nombre de résultats : </string>
+    <string name="no_user">Aucun utilisateur trouvé</string>
+    <string name="my_friend">Mes amis</string>
+    <string name="my_chat">Chat</string>
 </resources>

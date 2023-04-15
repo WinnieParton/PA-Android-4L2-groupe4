@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PA-Android</string>
+    <string name="app_desc">Annual Android Project: GROUP 4</string>
     <!-- Login-related strings -->
     <string name="name_account">Account name</string>
     <string name="email">Your email address</string>
     <string name="name_password">Password</string>
     <string name="password">Your password</string>
     <string name="forget_password">Forgot your password?</string>
-    <string name="invalid_username">No account yet? Join us!</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">Login failed</string>
     <string name="not_account">No account yet? Join us!</string>
     <string name="plaholder_pseudo">Your nickname</string>
     <string name="confirm_password">Confirm password</string>
@@ -17,6 +15,22 @@
     <string name="title_email">Email</string>
     <string name="cancel">Cancel</string>
     <string name="validate">Validate</string>
-    <string name="login_button_text">Get started</string>
+    <string name="login_button_text">Sign In</string>
+    <string name="signup_button_text">Sign UP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="name_profil">Mary Smith</string>
+    <string name="phone_profil">SMS: 415-555-789</string>
+    <string name="number_friend">Friends</string>
+    <string name="number_message">Messages</string>
+    <string name="place_holder_search">Search for a user…</string>
+    <string name="item_name_game">King Grin</string>
+    <string name="item_name_cat">Oil, spray paint</string>
+    <string name="read_more_game">Read more</string>
+    <string name="nb_result">Number of results : </string>
+    <string name="no_user">No users found</string>
+    <string name="my_friend">My Friends</string>
+    <string name="my_chat">Chat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

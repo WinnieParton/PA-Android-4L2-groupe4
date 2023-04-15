@@ -1,19 +1,13 @@
 package com.example.pa_android
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import android.view.View.OnTouchListener
-import androidx.core.content.ContextCompat
 
 class LoginFragment : Fragment() {
 
@@ -34,9 +28,11 @@ class LoginFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.forget_password_text_title).applyUnderlineText(getString(R.string.forget_password))
+        view.findViewById<TextView>(R.id.forget_password_text_title)
+            .applyUnderlineText(getString(R.string.forget_password))
 
-        view.findViewById<TextView>(R.id.signup_text).applyUnderlineText(getString(R.string.not_account))
+        view.findViewById<TextView>(R.id.signup_text)
+            .applyUnderlineText(getString(R.string.not_account))
 
         view.findViewById<TextView>(R.id.forget_password_text_title).setOnClickListener {
             findNavController().navigate(

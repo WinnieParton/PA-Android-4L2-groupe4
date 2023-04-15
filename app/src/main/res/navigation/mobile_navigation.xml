@@ -37,6 +37,9 @@
         android:name="com.example.pa_android.ForgetPasswordFragment"
         android:label="ForgetPasswordFragment"
         tools:layout="@layout/fragment_forget_password">
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -59,5 +62,40 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_researchUserFragment"
+            app:destination="@id/researchUserFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragment_detail_user"
+            app:destination="@id/fragment_detail_user" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.pa_android.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.example.pa_android.ProfilFragment"
+        android:label="ProfilFragment"
+        tools:layout="@layout/fragment_profil"></fragment>
+    <fragment
+        android:id="@+id/researchUserFragment"
+        android:name="com.example.pa_android.ResearchUserFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_research_user"></fragment>
+    <fragment
+        android:id="@+id/fragment_friends"
+        android:name="com.example.pa_android.FriendsFragment"
+        android:label="Friends"
+        tools:layout="@layout/fragment_friends"/>
+    <fragment
+        android:id="@+id/fragment_detail_user"
+        android:name="com.example.pa_android.DetailUserFragment"
+        android:label="Information"
+        tools:layout="@layout/fragment_detail_user">
+        <argument
+            android:name="user"
+            app:argType="com.example.pa_android.User" />
     </fragment>
 </navigation>
