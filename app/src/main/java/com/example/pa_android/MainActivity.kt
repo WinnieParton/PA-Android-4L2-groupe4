@@ -39,13 +39,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.sms -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container,MessageListFragment())
+                        .replace(R.id.fragment_container, MessageListFragment())
                         .commit()
                     true
                 }
-                R.id.profile -> {
+                R.id.friend -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, ProfilFragment())
+                        .replace(R.id.fragment_container, FriendsFragment())
                         .commit()
                     true
                 }
@@ -61,13 +61,13 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-fun TextView.applyUnderlineText(text: String){
+fun TextView.applyUnderlineText(text: String) {
     val spannable = SpannableString(text)
     spannable.setSpan(UnderlineSpan(), 0, text.length, 0)
     setText(spannable)
 }
 
-fun TextView.makeBoldText(text: String){
+fun TextView.makeBoldText(text: String) {
     val spannable = SpannableString(text)
     spannable.setSpan(
         StyleSpan(Typeface.BOLD),
@@ -75,5 +75,11 @@ fun TextView.makeBoldText(text: String){
         text.length,
         Spannable.SPAN_INCLUSIVE_INCLUSIVE
     )
+    setText(spannable)
+}
+
+fun TextView.applyUnderlineTextPart(text: String) {
+    val spannable = SpannableString(text)
+    spannable.setSpan(UnderlineSpan(), 0, text.indexOf(':'), 0)
     setText(spannable)
 }

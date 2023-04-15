@@ -5,17 +5,17 @@
         android:id="@+id/home"
         android:icon="@drawable/home"
         android:title="Home"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/sms"
         android:icon="@drawable/sms"
         android:title="SMS"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
     <item
-        android:id="@+id/profile"
-        android:icon="@drawable/sentiment_neutral"
-        android:title="Profile"
-        app:showAsAction="always"/>
+        android:id="@+id/friend"
+        android:icon="@drawable/diversity"
+        android:title="Friends"
+        app:showAsAction="always" />
 </menu>

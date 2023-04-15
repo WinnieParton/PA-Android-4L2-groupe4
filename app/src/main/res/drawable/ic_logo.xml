@@ -1,10 +1,14 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:width="141dp" android:height="141dp">
+    <item
+        android:width="141dp"
+        android:height="141dp">
         <shape android:shape="oval">
             <solid android:color="@color/third" />
         </shape>
     </item>
-    <item  android:gravity="center">
-        <bitmap android:src="@drawable/logo" android:gravity="center" />
+    <item android:gravity="center">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/logo" />
     </item>
 </layer-list>

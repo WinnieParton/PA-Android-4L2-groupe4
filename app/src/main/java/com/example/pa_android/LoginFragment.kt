@@ -28,9 +28,11 @@ class LoginFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.forget_password_text_title).applyUnderlineText(getString(R.string.forget_password))
+        view.findViewById<TextView>(R.id.forget_password_text_title)
+            .applyUnderlineText(getString(R.string.forget_password))
 
-        view.findViewById<TextView>(R.id.signup_text).applyUnderlineText(getString(R.string.not_account))
+        view.findViewById<TextView>(R.id.signup_text)
+            .applyUnderlineText(getString(R.string.not_account))
 
         view.findViewById<TextView>(R.id.forget_password_text_title).setOnClickListener {
             findNavController().navigate(

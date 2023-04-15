@@ -8,9 +8,6 @@
     <string name="name_password">Mot de passe</string>
     <string name="password">Votre mot de passe</string>
     <string name="forget_password">Vous avez oublié votre mot de passe ?</string>
-    <string name="invalid_username">Pas encore de comtpe ? Rejoignez-nous !</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">Login failed</string>
     <string name="not_account">Pas encore de comtpe ? Rejoignez-nous !</string>
     <string name="plaholder_pseudo">Votre pseudo</string>
     <string name="confirm_password">Confirmez le mot de passe</string>
@@ -22,7 +19,6 @@
     <string name="signup_button_text">Inscrivez-vous</string>
     <!-- TODO: Remove or change this placeholder text -->
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name_profil">Mary Smith</string>
     <string name="phone_profil">SMS: 415-555-789</string>
     <string name="number_friend">Friends</string>
@@ -31,4 +27,8 @@
     <string name="item_name_cat">Oil, spray paint</string>
     <string name="read_more_game">Voir plus</string>
     <string name="item_name_game">King Grin</string>
+    <string name="nb_result">Nombre de résultats : </string>
+    <string name="no_user">Aucun utilisateur trouvé</string>
+    <string name="my_friend">Mes amis</string>
+
 </resources>

@@ -2,11 +2,11 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Background color -->
-    <item android:drawable="@android:color/black"/>
+    <item android:drawable="@android:color/black" />
 
     <!-- Bottom border -->
     <item
         android:bottom="1dp"
-        android:drawable="@color/third"/>
+        android:drawable="@color/third" />
 
 </layer-list>

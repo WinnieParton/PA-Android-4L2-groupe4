@@ -21,6 +21,7 @@ class SplashScreemFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_splash_screem, container, false)
     }
+
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
@@ -30,7 +31,8 @@ class SplashScreemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<TextView>(R.id.signup_btton).setBackgroundResource(R.drawable.radius_cancel)
+        view.findViewById<TextView>(R.id.signup_btton)
+            .setBackgroundResource(R.drawable.radius_cancel)
 
         view.findViewById<TextView>(R.id.login_button).setOnClickListener {
             findNavController().navigate(

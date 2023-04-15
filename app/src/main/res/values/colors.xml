@@ -3,8 +3,11 @@
     <color name="primary">#E63946</color>
     <color name="secondary">#cf333f</color>
     <color name="third">#F2EDEB</color>
-    <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#636363</color>
+    <color name="bg_green">#e5faf7</color>
+    <color name="bg_red">#ffedf1</color>e2e5ee
+    <color name="bg_gray">#cdd1e0</color>
+    <color name="green">#38c2b9</color>
 
 </resources>

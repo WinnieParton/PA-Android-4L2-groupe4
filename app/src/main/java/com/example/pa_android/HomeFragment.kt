@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 class HomeFragment : Fragment() {
@@ -18,9 +19,10 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         return view
     }
+
     override fun onResume() {
         super.onResume()
-       // (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).setupBottomNavigationBar()
 
-        }
+    }
 
 }
