@@ -1,7 +1,10 @@
 package com.example.pa_android
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
 import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -61,5 +64,16 @@ class MainActivity : AppCompatActivity() {
 fun TextView.applyUnderlineText(text: String){
     val spannable = SpannableString(text)
     spannable.setSpan(UnderlineSpan(), 0, text.length, 0)
+    setText(spannable)
+}
+
+fun TextView.makeBoldText(text: String){
+    val spannable = SpannableString(text)
+    spannable.setSpan(
+        StyleSpan(Typeface.BOLD),
+        0,
+        text.length,
+        Spannable.SPAN_INCLUSIVE_INCLUSIVE
+    )
     setText(spannable)
 }

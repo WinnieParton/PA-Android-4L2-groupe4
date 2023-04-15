@@ -63,4 +63,19 @@
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.pa_android.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.example.pa_android.ProfilFragment"
+        android:label="ProfilFragment"
+        tools:layout="@layout/fragment_profil">
+    </fragment>
 </navigation>

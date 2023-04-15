@@ -18,7 +18,17 @@
     <string name="title_email">Email</string>
     <string name="cancel">Annuler</string>
     <string name="validate">Valider</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="login_button_text">Se connecter</string>
     <string name="signup_button_text">Inscrivez-vous</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_profil">Mary Smith</string>
+    <string name="phone_profil">SMS: 415-555-789</string>
+    <string name="number_friend">Friends</string>
+    <string name="number_message">Messages</string>
+    <string name="place_holder_search">Rechercher un utilisateur…</string>
+    <string name="item_name_cat">Oil, spray paint</string>
+    <string name="read_more_game">Voir plus</string>
+    <string name="item_name_game">King Grin</string>
 </resources>

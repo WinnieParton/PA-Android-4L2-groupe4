@@ -32,8 +32,6 @@ class HomeFragment : Fragment() {
                     HomeFragmentDirections.actionGameHomeFragmentToGameLoginFragment()
                 )*/
             }
-
-
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
