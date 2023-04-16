@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class GamesAdapter(
     private val games: List<Game>,
-    private val onClickListener: OnClickListener
+    private val onClickListener: OnClickListener,
+    private val type: String,
 ) : RecyclerView.Adapter<GameViewHolder>() {
 
     override fun getItemCount(): Int = games.size

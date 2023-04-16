@@ -24,6 +24,7 @@
     <string name="number_friend">Friends</string>
     <string name="number_message">Messages</string>
     <string name="place_holder_search">Rechercher un utilisateur…</string>
+    <string name="place_holder_search_game">Rechercher un jeu…</string>
     <string name="item_name_cat">Oil, spray paint</string>
     <string name="read_more_game">Voir plus</string>
     <string name="item_name_game">King Grin</string>
@@ -31,4 +32,9 @@
     <string name="no_user">Aucun utilisateur trouvé</string>
     <string name="my_friend">Mes amis</string>
     <string name="my_chat">Chat</string>
+    <string name="title_list_game">Liste de jeux</string>
+    <string name="search_user">Rechercher un utilisateur</string>
+    <string name="my_game">Ma liste de jeux</string>
+    <string name="my_search">Recherche</string>
+
 </resources>

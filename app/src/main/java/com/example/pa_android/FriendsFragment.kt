@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -55,7 +57,17 @@ class FriendsFragment : Fragment() {
             "ok"
         )
     )
+    // Make sure to use the FloatingActionButton for all the FABs
+    private lateinit var mAddFab: FloatingActionButton
+    private lateinit var mAddAlarmFab: FloatingActionButton
+    private lateinit var mAddPersonFab: FloatingActionButton
 
+    // These are taken to make visible and invisible along with FABs
+    private lateinit var addAlarmActionText: TextView
+    private lateinit var addPersonActionText: TextView
+
+    // to check whether sub FAB buttons are visible or not.
+    private var isAllFabsVisible: Boolean? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,12 +83,54 @@ class FriendsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mAddFab = view.findViewById(R.id.add_fab)
 
-        view.findViewById<FloatingActionButton>(R.id.add_fab).setOnClickListener {
+        // FAB button
+        mAddAlarmFab = view.findViewById(R.id.add_alarm_fab)
+        mAddPersonFab = view.findViewById(R.id.add_person_fab)
+
+        addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
+        addPersonActionText = view.findViewById(R.id.add_person_action_text)
+        view.findViewById<FloatingActionButton?>(R.id.add_home_fab).visibility=View.GONE
+        view.findViewById<TextView?>(R.id.add_home_action_text).visibility=View.GONE
+        mAddAlarmFab.visibility = View.GONE
+        mAddPersonFab.visibility = View.GONE
+        addAlarmActionText.visibility = View.GONE
+        addPersonActionText.visibility = View.GONE
+
+        isAllFabsVisible = false
+
+        mAddFab.setOnClickListener(View.OnClickListener {
+            (if (!isAllFabsVisible!!) {
+                mAddAlarmFab.show()
+                mAddPersonFab.show()
+                addAlarmActionText.visibility = View.VISIBLE
+                addPersonActionText.visibility = View.VISIBLE
+
+                true
+            } else {
+                mAddAlarmFab.hide()
+                mAddPersonFab.hide()
+                addAlarmActionText.visibility = View.GONE
+                addPersonActionText.visibility = View.GONE
+
+                false
+            }).also { isAllFabsVisible = it }
+        })
+        mAddPersonFab.setOnClickListener {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToResearchUserFragment()
             )
+            //Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
         }
+
+        mAddAlarmFab.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToGameFragment()
+            )
+        }
+//
+
         getUser(view)
 
     }

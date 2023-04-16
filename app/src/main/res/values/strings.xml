@@ -23,14 +23,19 @@
     <string name="number_friend">Friends</string>
     <string name="number_message">Messages</string>
     <string name="place_holder_search">Search for a user…</string>
+    <string name="place_holder_search_game">Search for a game…</string>
     <string name="item_name_game">King Grin</string>
     <string name="item_name_cat">Oil, spray paint</string>
     <string name="read_more_game">Read more</string>
     <string name="nb_result">Number of results : </string>
     <string name="no_user">No users found</string>
     <string name="my_friend">My Friends</string>
-    <string name="my_chat">Chat</string>
+    <string name="my_chat">Message</string>
+    <string name="my_search">Research</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_list_game">List of games</string>
+    <string name="search_user">Search for a user</string>
+    <string name="my_game">My List of Game</string>
 
 </resources>
