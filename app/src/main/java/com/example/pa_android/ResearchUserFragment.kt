@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ResearchUserFragment : Fragment() {
     private lateinit var rv: RecyclerView
@@ -55,7 +58,13 @@ class ResearchUserFragment : Fragment() {
             "ok"
         )
     )
-
+    // Make sure to use the FloatingActionButton for all the FABs
+    private lateinit var mAddFab: FloatingActionButton
+    private lateinit var mAddAlarmFab: FloatingActionButton
+    private lateinit var addAlarmActionText: TextView
+    private lateinit var mHomeFab: FloatingActionButton
+    private lateinit var homeActionText: TextView
+    private var isAllFabsVisible: Boolean? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,16 +73,62 @@ class ResearchUserFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_research_user, container, false)
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         val actionbar = (activity as AppCompatActivity).supportActionBar
         actionbar?.show()
         actionbar?.setDisplayHomeAsUpEnabled(true)
         actionbar?.setHomeAsUpIndicator(R.drawable.close)
-    }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mAddFab = view.findViewById(R.id.add_fab)
+
+        // FAB button
+        mAddAlarmFab = view.findViewById(R.id.add_alarm_fab)
+         view.findViewById<FloatingActionButton?>(R.id.add_person_fab).visibility=View.GONE
+
+        addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
+        view.findViewById<TextView>(R.id.add_person_action_text).visibility=View.GONE
+        mHomeFab  =view.findViewById(R.id.add_home_fab)
+        homeActionText = view.findViewById(R.id.add_home_action_text)
+
+        mAddAlarmFab.visibility = View.GONE
+        addAlarmActionText.visibility = View.GONE
+        mHomeFab.visibility = View.GONE
+        homeActionText.visibility = View.GONE
+        isAllFabsVisible = false
+        mHomeFab  =view.findViewById(R.id.add_home_fab)
+        homeActionText = view.findViewById(R.id.add_home_action_text)
+        mAddFab.setOnClickListener(View.OnClickListener {
+            (if (!isAllFabsVisible!!) {
+                mAddAlarmFab.show()
+                addAlarmActionText.visibility = View.VISIBLE
+                mHomeFab.show()
+                homeActionText.visibility = View.VISIBLE
+                true
+            } else {
+                mAddAlarmFab.hide()
+                addAlarmActionText.visibility = View.GONE
+                mHomeFab.hide()
+                homeActionText.visibility = View.GONE
+                false
+            }).also { isAllFabsVisible = it }
+        })
+
+
+        mAddAlarmFab.setOnClickListener {
+            findNavController().navigate(
+                ResearchUserFragmentDirections.actionResearchUserFragmentToGameFragment()
+            )
+        }
+        mHomeFab.setOnClickListener {
+            findNavController().navigate(
+                ResearchUserFragmentDirections.actionResearchUserFragmentToHomeFragment()
+            )
+        }
+//
         view.findViewById<TextView>(R.id.nb_result)
             .applyUnderlineTextPart(getString(R.string.nb_result) + 2)
 
@@ -89,6 +144,12 @@ class ResearchUserFragment : Fragment() {
     }
 
     private val listener = UsersAdapter.OnClickListener { user ->
+
+        if(user.status == "ok")
+            Toast.makeText(requireContext(), "Person Already Added", Toast.LENGTH_SHORT).show()
+        else if(user.status == "no")
+            Toast.makeText(requireContext(), "You Can Add This Person", Toast.LENGTH_SHORT).show()
+        else Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
         // Add action to navigate
         //findNavController().navigate(
         //GameHomeFragmentDirections.actionGameHomeFragmentToGameDetailFragment(game, userArgs.userArgs)
