@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_homeFragment_to_game_fragment"
             app:destination="@id/game_fragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_game_info_fragment"
+            app:destination="@id/game_info_fragment" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
@@ -119,5 +122,26 @@
         <action
             android:id="@+id/action_game_fragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_game_fragment_to_game_info_fragment"
+            app:destination="@id/game_info_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/game_info_fragment"
+        android:name="com.example.pa_android.GameInfoFragment"
+        android:label="Game"
+        tools:layout="@layout/fragment_game_info">
+        <action
+            android:id="@+id/action_game_info_fragment_to_game_fragment"
+            app:destination="@id/game_fragment" />
+        <action
+            android:id="@+id/action_game_info_fragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_game_info_fragment_to_researchUserFragment"
+            app:destination="@id/researchUserFragment" />
+        <argument
+            android:name="Game"
+            app:argType="com.example.pa_android.Game" />
     </fragment>
 </navigation>

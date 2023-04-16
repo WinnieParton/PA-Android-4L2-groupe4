@@ -149,9 +149,8 @@ class DashboardFragment : Fragment() {
 
     private val listener = GamesAdapter.OnClickListener { game ->
         // Add action to navigate
-        //findNavController().navigate(
-        //GameHomeFragmentDirections.actionGameHomeFragmentToGameDetailFragment(game, userArgs.userArgs)
-        //)
-
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToGameInfoFragment(game)
+        )
     }
 }
