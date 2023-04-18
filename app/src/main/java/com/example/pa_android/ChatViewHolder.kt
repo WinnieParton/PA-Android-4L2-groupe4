@@ -18,9 +18,9 @@ class ChatViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
         name_editeurText.text = chat.detailed_description
 
-       /* if (chat.header_image?.isNotEmpty() == true || chat.header_image != null)
-            Glide.with(itemView)
-                .load(chat.header_image)
-                .into(id_image_jeu_itemImg)*/
+        /* if (chat.header_image?.isNotEmpty() == true || chat.header_image != null)
+             Glide.with(itemView)
+                 .load(chat.header_image)
+                 .into(id_image_jeu_itemImg)*/
     }
 }

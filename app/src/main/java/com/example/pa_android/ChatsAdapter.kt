@@ -23,7 +23,7 @@ class ChatsAdapter(
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         holder.updateView(chats[position])
 
-        if(type =="chat")
+        if (type == "chat")
             holder.itemView.findViewById<CardView>(R.id.item_chat).setOnClickListener {
                 onClickListener.onClick(chats[position])
             }

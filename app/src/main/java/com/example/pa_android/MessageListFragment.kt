@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,8 +70,8 @@ class MessageListFragment : Fragment() {
 
         addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
         addPersonActionText = view.findViewById(R.id.add_person_action_text)
-        view.findViewById<FloatingActionButton?>(R.id.add_home_fab).visibility=View.GONE
-        view.findViewById<TextView?>(R.id.add_home_action_text).visibility=View.GONE
+        view.findViewById<FloatingActionButton?>(R.id.add_home_fab).visibility = View.GONE
+        view.findViewById<TextView?>(R.id.add_home_action_text).visibility = View.GONE
         mAddAlarmFab.visibility = View.GONE
         mAddPersonFab.visibility = View.GONE
         addAlarmActionText.visibility = View.GONE

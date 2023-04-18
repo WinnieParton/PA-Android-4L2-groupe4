@@ -101,7 +101,7 @@
         android:id="@+id/fragment_friends"
         android:name="com.example.pa_android.FriendsFragment"
         android:label="Friends"
-        tools:layout="@layout/fragment_friends"/>
+        tools:layout="@layout/fragment_friends" />
     <fragment
         android:id="@+id/fragment_detail_user"
         android:name="com.example.pa_android.DetailUserFragment"

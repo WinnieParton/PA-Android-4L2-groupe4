@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -46,6 +45,7 @@ class DashboardFragment : Fragment() {
         )
     )
     private lateinit var rv: RecyclerView
+
     // Make sure to use the FloatingActionButton for all the FABs
     private lateinit var mAddFab: FloatingActionButton
     private lateinit var mAddAlarmFab: FloatingActionButton
@@ -65,10 +65,12 @@ class DashboardFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         return view
     }
+
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
+
     //
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,8 +88,8 @@ class DashboardFragment : Fragment() {
         mAddPersonFab.visibility = View.GONE
         addAlarmActionText.visibility = View.GONE
         addPersonActionText.visibility = View.GONE
-        view.findViewById<FloatingActionButton?>(R.id.add_home_fab).visibility=View.GONE
-        view.findViewById<TextView?>(R.id.add_home_action_text).visibility=View.GONE
+        view.findViewById<FloatingActionButton?>(R.id.add_home_fab).visibility = View.GONE
+        view.findViewById<TextView?>(R.id.add_home_action_text).visibility = View.GONE
 
         isAllFabsVisible = false
 
@@ -110,7 +112,7 @@ class DashboardFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToResearchUserFragment()
+                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment()
             )
             //Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
         }
@@ -143,7 +145,7 @@ class DashboardFragment : Fragment() {
     private fun getGame(view: View) {
         rv = view.findViewById<RecyclerView>(R.id.list_game_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
-        rv.adapter = GamesAdapter(games, listener,"all_game")
+        rv.adapter = GamesAdapter(games, listener, "all_game")
 
     }
 

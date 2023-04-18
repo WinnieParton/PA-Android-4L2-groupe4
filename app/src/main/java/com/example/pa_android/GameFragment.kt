@@ -1,12 +1,11 @@
 package com.example.pa_android
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -55,12 +54,12 @@ class GameFragment : Fragment() {
         mAddFab = view.findViewById(R.id.add_fab)
 
         // FAB button
-        view.findViewById<FloatingActionButton?>(R.id.add_alarm_fab).visibility=View.GONE
-        view.findViewById<TextView?>(R.id.add_alarm_action_text).visibility=View.GONE
+        view.findViewById<FloatingActionButton?>(R.id.add_alarm_fab).visibility = View.GONE
+        view.findViewById<TextView?>(R.id.add_alarm_action_text).visibility = View.GONE
         mAddPersonFab = view.findViewById(R.id.add_person_fab)
 
-        addPersonActionText =view.findViewById(R.id.add_person_action_text)
-        mHomeFab  =view.findViewById(R.id.add_home_fab)
+        addPersonActionText = view.findViewById(R.id.add_person_action_text)
+        mHomeFab = view.findViewById(R.id.add_home_fab)
         homeActionText = view.findViewById(R.id.add_home_action_text)
 
         mAddPersonFab.visibility = View.GONE
@@ -86,7 +85,7 @@ class GameFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-               GameFragmentDirections.actionGameFragmentToResearchUserFragment()
+                GameFragmentDirections.actionGameFragmentToResearchUserFragment()
             )
 
         }
@@ -103,7 +102,7 @@ class GameFragment : Fragment() {
     private fun getGame(view: View) {
         rv = view.findViewById<RecyclerView>(R.id.list_game_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
-        rv.adapter = GamesAdapter(games, listener,"my_game")
+        rv.adapter = GamesAdapter(games, listener, "my_game")
 
     }
 
