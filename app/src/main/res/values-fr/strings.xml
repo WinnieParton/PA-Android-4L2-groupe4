@@ -18,9 +18,11 @@
     <string name="login_button_text">Se connecter</string>
     <string name="signup_button_text">Inscrivez-vous</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_search_user">Rechercher un utilisateur</string>
+    <string name="title_search_game">Rechercher un jeu</string>
 
     <string name="name_profil">Mary Smith</string>
-    <string name="phone_profil">SMS: 415-555-789</string>
+    <string name="phone_profil">E-MAIL: koumwinnie@gmail.com</string>
     <string name="number_friend">Friends</string>
     <string name="number_message">Messages</string>
     <string name="place_holder_search">Rechercher un utilisateur…</string>

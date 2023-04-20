@@ -1,6 +1,7 @@
 package com.example.pa_android
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,9 @@ class GamesAdapter(
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         holder.updateView(games[position])
+
+        if(type == "all_game")
+            holder.itemView.findViewById<TextView>(R.id.ranking_by_game).visibility = View.GONE
 
         holder.itemView.findViewById<TextView>(R.id.item_click_button).setOnClickListener {
             onClickListener.onClick(games[position])

@@ -9,16 +9,15 @@
         android:id="@+id/relative_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        >
+        android:paddingTop="10dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/my_card_view"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
             app:cardCornerRadius="50dp"
-            app:cardElevation="2dp"
-            android:layout_marginBottom="10dp">
+            app:cardElevation="2dp">
 
             <ImageView
                 android:id="@+id/image_user"
@@ -62,7 +61,10 @@
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_name" />
+                app:layout_constraintTop_toBottomOf="@+id/user_name"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:maxEms="50"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

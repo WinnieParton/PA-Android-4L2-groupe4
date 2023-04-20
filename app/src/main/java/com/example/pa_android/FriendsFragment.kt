@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -57,6 +56,7 @@ class FriendsFragment : Fragment() {
             "ok"
         )
     )
+
     // Make sure to use the FloatingActionButton for all the FABs
     private lateinit var mAddFab: FloatingActionButton
     private lateinit var mAddAlarmFab: FloatingActionButton
@@ -91,8 +91,8 @@ class FriendsFragment : Fragment() {
 
         addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
         addPersonActionText = view.findViewById(R.id.add_person_action_text)
-        view.findViewById<FloatingActionButton?>(R.id.add_home_fab).visibility=View.GONE
-        view.findViewById<TextView?>(R.id.add_home_action_text).visibility=View.GONE
+        view.findViewById<FloatingActionButton?>(R.id.add_home_fab).visibility = View.GONE
+        view.findViewById<TextView?>(R.id.add_home_action_text).visibility = View.GONE
         mAddAlarmFab.visibility = View.GONE
         mAddPersonFab.visibility = View.GONE
         addAlarmActionText.visibility = View.GONE
@@ -138,7 +138,7 @@ class FriendsFragment : Fragment() {
     private fun getUser(view: View) {
         rv = view.findViewById<RecyclerView>(R.id.list_user_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
-        rv.adapter = UsersAdapter(users, listener,"list")
+        rv.adapter = UsersAdapter(users, listener, "list")
     }
 
     private val listener = UsersAdapter.OnClickListener { user ->

@@ -1,12 +1,11 @@
 package com.example.pa_android
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,14 +29,14 @@ class GameFragment : Fragment() {
         Game(
             3,
             "https://www.gamereactor.fr/media/90/_3229073.jpg",
-            "eeee fr",
-            "orrrr"
+            "Schouchin toxa",
+            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
         ),
         Game(
             4,
             "https://images.pexels.com/photos/6689072/pexels-photo-6689072.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "erererz",
-            "kkkkk"
+            "Algre Yuoi",
+            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
         )
     )
     private lateinit var rv: RecyclerView
@@ -55,12 +54,12 @@ class GameFragment : Fragment() {
         mAddFab = view.findViewById(R.id.add_fab)
 
         // FAB button
-        view.findViewById<FloatingActionButton?>(R.id.add_alarm_fab).visibility=View.GONE
-        view.findViewById<TextView?>(R.id.add_alarm_action_text).visibility=View.GONE
+        view.findViewById<FloatingActionButton?>(R.id.add_alarm_fab).visibility = View.GONE
+        view.findViewById<TextView?>(R.id.add_alarm_action_text).visibility = View.GONE
         mAddPersonFab = view.findViewById(R.id.add_person_fab)
 
-        addPersonActionText =view.findViewById(R.id.add_person_action_text)
-        mHomeFab  =view.findViewById(R.id.add_home_fab)
+        addPersonActionText = view.findViewById(R.id.add_person_action_text)
+        mHomeFab = view.findViewById(R.id.add_home_fab)
         homeActionText = view.findViewById(R.id.add_home_action_text)
 
         mAddPersonFab.visibility = View.GONE
@@ -86,7 +85,7 @@ class GameFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-               GameFragmentDirections.actionGameFragmentToResearchUserFragment()
+                GameFragmentDirections.actionGameFragmentToResearchUserFragment()
             )
 
         }
@@ -103,15 +102,14 @@ class GameFragment : Fragment() {
     private fun getGame(view: View) {
         rv = view.findViewById<RecyclerView>(R.id.list_game_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
-        rv.adapter = GamesAdapter(games, listener,"my_game")
+        rv.adapter = GamesAdapter(games, listener, "my_game")
 
     }
 
     private val listener = GamesAdapter.OnClickListener { game ->
         // Add action to navigate
-        //findNavController().navigate(
-        //GameHomeFragmentDirections.actionGameHomeFragmentToGameDetailFragment(game, userArgs.userArgs)
-        //)
-
+        findNavController().navigate(
+            GameFragmentDirections.actionGameFragmentToGameInfoFragment(game)
+        )
     }
 }

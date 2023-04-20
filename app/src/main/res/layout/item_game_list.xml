@@ -51,12 +51,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15sp"
-                    android:background="@android:color/transparent"
                     android:text="@string/item_name_game"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:maxEms="25"/>
+                <TextView
+                    android:id="@+id/ranking_by_game"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15sp"
+                    android:text="50/70"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/name_editeur"
                     android:layout_width="wrap_content"
@@ -64,9 +74,13 @@
                     android:layout_marginBottom="10sp"
                     android:text="@string/item_name_cat"
                     android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/item_click_button"
                     app:layout_constraintStart_toStartOf="parent"
+
                     app:layout_constraintTop_toBottomOf="@+id/title_game"
-                    app:layout_constraintBottom_toTopOf="@+id/item_click_button"/>
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:maxEms="50"/>
 
                 <TextView
                     android:id="@+id/item_click_button"
@@ -78,9 +92,9 @@
                     android:text="@string/read_more_game"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@+id/name_editeur"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name_editeur" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </RelativeLayout>

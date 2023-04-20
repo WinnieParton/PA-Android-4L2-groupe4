@@ -25,12 +25,12 @@ class UsersAdapter(
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.updateView(users[position])
 
-        if(type =="search")
+        if (type == "search")
             holder.itemView.findViewById<CardView>(R.id.card_btn).setOnClickListener {
                 onClickListener.onClick(users[position])
             }
         else {
-            holder.itemView.findViewById<CardView>(R.id.card_btn).visibility= View.GONE
+            holder.itemView.findViewById<CardView>(R.id.card_btn).visibility = View.GONE
             holder.itemView.findViewById<RelativeLayout>(R.id.relative_user).setOnClickListener {
                 onClickListener.onClick(users[position])
             }

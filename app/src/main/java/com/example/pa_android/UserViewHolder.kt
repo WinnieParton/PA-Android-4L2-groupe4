@@ -22,19 +22,28 @@ class UserViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         user_name.text = user.username
         user_email.text = user.email
 
-        if (user.status=="ok") {
+        if (user.status == "ok") {
             val redColor = ContextCompat.getColor(itemView.context, R.color.bg_green)
             val colorStateList = ColorStateList.valueOf(redColor)
             card_btn.backgroundTintMode = PorterDuff.Mode.SRC_ATOP
             card_btn.backgroundTintList = colorStateList
-            img_card_btn.setImageDrawable(ContextCompat.getDrawable(itemView.context,R.drawable.task_alt));
-        }
-        else if (user.status=="no") {
+            img_card_btn.setImageDrawable(
+                ContextCompat.getDrawable(
+                    itemView.context,
+                    R.drawable.task_alt
+                )
+            );
+        } else if (user.status == "no") {
             val redColor = ContextCompat.getColor(itemView.context, R.color.bg_red)
             val colorStateList = ColorStateList.valueOf(redColor)
             card_btn.backgroundTintMode = PorterDuff.Mode.SRC_ATOP
             card_btn.backgroundTintList = colorStateList
-            img_card_btn.setImageDrawable(ContextCompat.getDrawable(itemView.context,R.drawable.cancel));
+            img_card_btn.setImageDrawable(
+                ContextCompat.getDrawable(
+                    itemView.context,
+                    R.drawable.cancel
+                )
+            );
         }
     }
 }
