@@ -1,19 +1,29 @@
 package com.example.pa_android
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.transition.Transition
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
+import java.io.File
+import java.io.FileOutputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 class GameInfoFragment : Fragment() {
     // Make sure to use the FloatingActionButton for all the FABs
@@ -25,11 +35,12 @@ class GameInfoFragment : Fragment() {
     private lateinit var addAlarmActionText: TextView
     // These are taken to make visible and invisible along with FABs
     private lateinit var addPersonActionText: TextView
-
     // to check whether sub FAB buttons are visible or not.
     private var isAllFabsVisible: Boolean? = null
+
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
+    private val game: GameInfoFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +61,10 @@ class GameInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<TextView>(R.id.title_game).text=game.game.name
+
+
         mAddFab = view.findViewById(R.id.add_fab)
 
         // FAB button
@@ -111,7 +126,7 @@ class GameInfoFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
             // Return the appropriate fragment based on the tab position
             return when (position) {
-                0 -> GameInfoDescriptionFragment()
+                0 -> GameInfoDescriptionFragment(game.game.detailed_description!!)
                 1 -> GameInfoClassementFragment()
                 else -> throw IllegalArgumentException("Invalid tab position: $position")
             }

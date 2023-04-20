@@ -129,8 +129,6 @@ class ResearchUserFragment : Fragment() {
             )
         }
 //
-        view.findViewById<TextView>(R.id.nb_result)
-            .applyUnderlineTextPart(getString(R.string.nb_result) + 2)
 
         getUser(view)
         val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar_home)

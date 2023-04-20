@@ -168,7 +168,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/marging_text"
-                        android:text="Rechercher un utilisateur"
+                        android:text="@string/title_search_user"
                         android:textSize="@dimen/title_card"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"

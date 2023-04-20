@@ -81,21 +81,13 @@
                     tools:ignore="ContentDescription" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/nb_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10sp"
-                android:text="@string/nb_result"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/homeSearchBarSearch" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/card_view_top_corners_2"
             android:orientation="vertical"
             android:padding="15dp"

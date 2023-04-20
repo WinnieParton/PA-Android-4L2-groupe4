@@ -61,7 +61,10 @@
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_name" />
+                app:layout_constraintTop_toBottomOf="@+id/user_name"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:maxEms="50"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
