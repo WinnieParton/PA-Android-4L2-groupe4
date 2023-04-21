@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="15dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:text="@string/app_desc"
+        android:background="@drawable/send_chat_corners"
+        android:textColor="@color/white"
+        android:layout_marginTop="15dp"
+        android:id="@+id/text_send"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/text_send"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:text="@string/fab_transformation_scrim_behavior"
+        android:background="@drawable/receive_chat_corners"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/text_receive"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

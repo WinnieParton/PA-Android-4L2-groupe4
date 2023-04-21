@@ -1,14 +1,12 @@
 package com.example.pa_android
 
-import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.transition.Transition
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -17,13 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import java.io.File
-import java.io.FileOutputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 class GameInfoFragment : Fragment() {
     // Make sure to use the FloatingActionButton for all the FABs
@@ -33,8 +26,11 @@ class GameInfoFragment : Fragment() {
     private lateinit var homeActionText: TextView
     private lateinit var mAddAlarmFab: FloatingActionButton
     private lateinit var addAlarmActionText: TextView
+    private lateinit var addLogoutActionText: TextView
+    private lateinit var mAddLogoutFab: FloatingActionButton
     // These are taken to make visible and invisible along with FABs
     private lateinit var addPersonActionText: TextView
+
     // to check whether sub FAB buttons are visible or not.
     private var isAllFabsVisible: Boolean? = null
 
@@ -62,11 +58,17 @@ class GameInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<TextView>(R.id.title_game).text=game.game.name
-
+        view.findViewById<TextView>(R.id.title_game).text = game.game.name
+        if (game.game.header_image?.isNotEmpty() == true || game.game.header_image != null)
+            Glide.with(view)
+                .load(game.game.header_image)
+                .into(view.findViewById(R.id.imageView))
 
         mAddFab = view.findViewById(R.id.add_fab)
-
+        addLogoutActionText = view.findViewById(R.id.add_logout_action_text)
+        mAddLogoutFab = view.findViewById(R.id.add_logout_fab)
+        mAddLogoutFab.visibility = View.GONE
+        addLogoutActionText.visibility = View.GONE
         // FAB button
         mAddPersonFab = view.findViewById(R.id.add_person_fab)
         addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
@@ -90,6 +92,8 @@ class GameInfoFragment : Fragment() {
                 homeActionText.visibility = View.VISIBLE
                 mAddAlarmFab.show()
                 addAlarmActionText.visibility = View.VISIBLE
+                addLogoutActionText.visibility = View.VISIBLE
+                mAddLogoutFab.show()
                 true
             } else {
                 mAddPersonFab.hide()
@@ -98,6 +102,8 @@ class GameInfoFragment : Fragment() {
                 homeActionText.visibility = View.GONE
                 mAddAlarmFab.hide()
                 addAlarmActionText.visibility = View.GONE
+                addLogoutActionText.visibility = View.GONE
+                mAddLogoutFab.hide()
                 false
             }).also { isAllFabsVisible = it }
         })
@@ -117,7 +123,11 @@ class GameInfoFragment : Fragment() {
                 GameInfoFragmentDirections.actionGameInfoFragmentToHomeFragment()
             )
         }
-
+        mAddLogoutFab.setOnClickListener {
+            findNavController().navigate(
+                GameInfoFragmentDirections.actionGameInfoFragmentToLoginFragment()
+            )
+        }
     }
 
     // Pager adapter for the view pager

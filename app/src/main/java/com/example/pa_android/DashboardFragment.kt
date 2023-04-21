@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -54,7 +55,8 @@ class DashboardFragment : Fragment() {
     // These are taken to make visible and invisible along with FABs
     private lateinit var addAlarmActionText: TextView
     private lateinit var addPersonActionText: TextView
-
+    private lateinit var addLogoutActionText: TextView
+    private lateinit var mAddLogoutFab: FloatingActionButton
     // to check whether sub FAB buttons are visible or not.
     private var isAllFabsVisible: Boolean? = null
     override fun onCreateView(
@@ -83,6 +85,10 @@ class DashboardFragment : Fragment() {
 
         addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
         addPersonActionText = view.findViewById(R.id.add_person_action_text)
+        addLogoutActionText = view.findViewById(R.id.add_logout_action_text)
+        mAddLogoutFab = view.findViewById(R.id.add_logout_fab)
+        mAddLogoutFab.visibility = View.GONE
+        addLogoutActionText.visibility = View.GONE
 
         mAddAlarmFab.visibility = View.GONE
         mAddPersonFab.visibility = View.GONE
@@ -99,6 +105,8 @@ class DashboardFragment : Fragment() {
                 mAddPersonFab.show()
                 addAlarmActionText.visibility = View.VISIBLE
                 addPersonActionText.visibility = View.VISIBLE
+                addLogoutActionText.visibility = View.VISIBLE
+                mAddLogoutFab.show()
 
                 true
             } else {
@@ -106,6 +114,8 @@ class DashboardFragment : Fragment() {
                 mAddPersonFab.hide()
                 addAlarmActionText.visibility = View.GONE
                 addPersonActionText.visibility = View.GONE
+                addLogoutActionText.visibility = View.GONE
+                mAddLogoutFab.hide()
 
                 false
             }).also { isAllFabsVisible = it }
@@ -122,6 +132,12 @@ class DashboardFragment : Fragment() {
                 HomeFragmentDirections.actionHomeFragmentToGameFragment()
             )
         }
+
+        mAddLogoutFab.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+            )
+        }
 //
         val relativeLayout: RelativeLayout = view.findViewById(R.id.homeSearchBar)
         val drawable1 = GradientDrawable()
@@ -129,11 +145,11 @@ class DashboardFragment : Fragment() {
         val color = ContextCompat.getColor(requireContext(), R.color.white)
         drawable1.setColor(color) // set the color using a resource
         relativeLayout.background = drawable1
-        /*view.findViewById<ImageView>(R.id.id_image_setting).setOnClickListener {
+        view.findViewById<ImageView>(R.id.id_setting).setOnClickListener {
             findNavController().navigate(
-                DashboardFragmentDirections.actionDashboardFragmentToProfilFragment()
+                HomeFragmentDirections.actionHomeFragmentToProfilFragment()
             )
-        }*/
+        }
         relativeLayout.setOnClickListener {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToResearchUserFragment()

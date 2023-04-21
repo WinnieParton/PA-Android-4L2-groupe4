@@ -25,20 +25,6 @@ class HomeFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                /*findNavController().navigate(
-                    HomeFragmentDirections.actionGameHomeFragmentToGameLoginFragment()
-                )*/
-            }
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).setupBottomNavigationBar()

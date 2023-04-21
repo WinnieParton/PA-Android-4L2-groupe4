@@ -1,14 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/signup_web"
     tools:context=".ProfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="zzzzzzzzzzzzzzzzzz" />
+        android:layout_marginTop="30dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/block_setting1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/title_chat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:paddingTop="20dp"
+                android:text="@string/my_profil"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/card_view_top_corners_2"
+            android:orientation="vertical"
+            android:padding="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/block_setting1">
+            <TextView
+                android:id="@+id/loginText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="@string/name_account"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/size_text_title_edit_text" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edittext"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="@dimen/drawable_padding_icon"
+                android:hint="@string/plaholder_pseudo"
+                android:inputType="text"
+                android:padding="@dimen/pading_edittext"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/size_text_regular" />
+
+            <TextView
+                android:id="@+id/title_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="@dimen/marging_text"
+                android:text="@string/title_email"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/size_text_title_edit_text" />
+
+            <EditText
+                android:id="@+id/email_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edittext"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="@dimen/drawable_padding_icon"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/pading_edittext"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/size_text_regular" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp">
+
+                <TextView
+                    android:id="@+id/buttoncancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radius_cancel"
+                    android:paddingHorizontal="20sp"
+                    android:paddingVertical="@dimen/pading_edittext"
+                    android:text="@string/cancel"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/size_text_title_edit_text"
+                    app:cornerRadius="@dimen/pading_edittext"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/buttonvalide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radius_validate"
+                    android:paddingHorizontal="20sp"
+                    android:paddingVertical="@dimen/pading_edittext"
+                    android:text="@string/validate"
+                    android:textColor="@color/third"
+                    android:textSize="@dimen/size_text_title_edit_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/float_button" />
 
 </FrameLayout>

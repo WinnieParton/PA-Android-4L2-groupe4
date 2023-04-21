@@ -14,16 +14,22 @@ class ChatsAdapter(
     override fun getItemCount(): Int = chats.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
+        if (type == "listchat")
+            return ChatViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_chat_list, parent, false)
+            )
+
         return ChatViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_chat_list, parent, false)
+                .inflate(R.layout.item_chat_send, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        holder.updateView(chats[position])
+        holder.updateView(chats[position], type, chats, position)
 
-        if (type == "chat")
+        if (type == "listchat")
             holder.itemView.findViewById<CardView>(R.id.item_chat).setOnClickListener {
                 onClickListener.onClick(chats[position])
             }

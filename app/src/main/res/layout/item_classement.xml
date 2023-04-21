@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    >
+    android:background="@android:color/transparent">
+
     <LinearLayout
+        android:id="@+id/item_user_ranking"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:paddingVertical="10dp"
-        android:id="@+id/item_user_ranking">
+        android:paddingVertical="10dp">
 
         <View
             android:layout_width="1dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="60dp"
@@ -30,15 +30,14 @@
                 app:cardElevation="2dp">
 
                 <TextView
+                    android:id="@+id/classement_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="20sp"
+                    android:background="@color/third"
+                    android:gravity="center"
                     android:text="1"
                     android:textAlignment="center"
-                    android:gravity="center"
-                    android:background="@color/third"
-                    android:id="@+id/classement_id"
-                    />
+                    android:textSize="20sp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -46,14 +45,14 @@
 
         <View
             android:layout_width="1dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/user_name"
@@ -61,20 +60,20 @@
                 android:layout_height="wrap_content"
                 android:text="@string/item_name_game"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/classement_value"
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="7500"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 

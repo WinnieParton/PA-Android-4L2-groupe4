@@ -65,6 +65,8 @@ class ResearchUserFragment : Fragment() {
     private lateinit var mHomeFab: FloatingActionButton
     private lateinit var homeActionText: TextView
     private var isAllFabsVisible: Boolean? = null
+    private lateinit var addLogoutActionText: TextView
+    private lateinit var mAddLogoutFab: FloatingActionButton
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,14 +75,6 @@ class ResearchUserFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_research_user, container, false)
     }
 
-    /*override fun onResume() {
-        super.onResume()
-        val actionbar = (activity as AppCompatActivity).supportActionBar
-        actionbar?.show()
-        actionbar?.setDisplayHomeAsUpEnabled(true)
-        actionbar?.setHomeAsUpIndicator(R.drawable.close)
-    }*/
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAddFab = view.findViewById(R.id.add_fab)
@@ -88,7 +82,10 @@ class ResearchUserFragment : Fragment() {
         // FAB button
         mAddAlarmFab = view.findViewById(R.id.add_alarm_fab)
         view.findViewById<FloatingActionButton?>(R.id.add_person_fab).visibility = View.GONE
-
+        addLogoutActionText = view.findViewById(R.id.add_logout_action_text)
+        mAddLogoutFab = view.findViewById(R.id.add_logout_fab)
+        mAddLogoutFab.visibility = View.GONE
+        addLogoutActionText.visibility = View.GONE
         addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
         view.findViewById<TextView>(R.id.add_person_action_text).visibility = View.GONE
         mHomeFab = view.findViewById(R.id.add_home_fab)
@@ -99,20 +96,22 @@ class ResearchUserFragment : Fragment() {
         mHomeFab.visibility = View.GONE
         homeActionText.visibility = View.GONE
         isAllFabsVisible = false
-        mHomeFab = view.findViewById(R.id.add_home_fab)
-        homeActionText = view.findViewById(R.id.add_home_action_text)
         mAddFab.setOnClickListener(View.OnClickListener {
             (if (!isAllFabsVisible!!) {
                 mAddAlarmFab.show()
                 addAlarmActionText.visibility = View.VISIBLE
                 mHomeFab.show()
                 homeActionText.visibility = View.VISIBLE
+                addLogoutActionText.visibility = View.VISIBLE
+                mAddLogoutFab.show()
                 true
             } else {
                 mAddAlarmFab.hide()
                 addAlarmActionText.visibility = View.GONE
                 mHomeFab.hide()
                 homeActionText.visibility = View.GONE
+                addLogoutActionText.visibility = View.GONE
+                mAddLogoutFab.hide()
                 false
             }).also { isAllFabsVisible = it }
         })
@@ -126,6 +125,11 @@ class ResearchUserFragment : Fragment() {
         mHomeFab.setOnClickListener {
             findNavController().navigate(
                 ResearchUserFragmentDirections.actionResearchUserFragmentToHomeFragment()
+            )
+        }
+        mAddLogoutFab.setOnClickListener {
+            findNavController().navigate(
+                ResearchUserFragmentDirections.actionResearchUserFragmentToLoginFragment()
             )
         }
 //

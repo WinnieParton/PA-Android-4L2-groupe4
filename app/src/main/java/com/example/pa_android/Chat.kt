@@ -8,5 +8,6 @@ data class Chat(
     val appid: Int,
     val header_image: String?,
     val name: String?,
-    val detailed_description: String?
+    val detailed_description: String?,
+    val send: Boolean
 ) : Parcelable
