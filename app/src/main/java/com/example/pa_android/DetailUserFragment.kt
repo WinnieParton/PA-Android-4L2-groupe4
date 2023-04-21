@@ -21,6 +21,8 @@ class DetailUserFragment : Fragment() {
     private lateinit var homeActionText: TextView
     private lateinit var mAddAlarmFab: FloatingActionButton
     private lateinit var addAlarmActionText: TextView
+    private lateinit var addLogoutActionText: TextView
+    private lateinit var mAddLogoutFab: FloatingActionButton
     // These are taken to make visible and invisible along with FABs
     private lateinit var addPersonActionText: TextView
     private var isAllFabsVisible: Boolean? = null
@@ -48,6 +50,7 @@ class DetailUserFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail_user, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAddFab = view.findViewById(R.id.add_fab)
@@ -59,7 +62,10 @@ class DetailUserFragment : Fragment() {
         addPersonActionText = view.findViewById(R.id.add_person_action_text)
         mHomeFab = view.findViewById(R.id.add_home_fab)
         homeActionText = view.findViewById(R.id.add_home_action_text)
-
+        addLogoutActionText = view.findViewById(R.id.add_logout_action_text)
+        mAddLogoutFab = view.findViewById(R.id.add_logout_fab)
+        mAddLogoutFab.visibility = View.GONE
+        addLogoutActionText.visibility = View.GONE
         mAddPersonFab.visibility = View.GONE
         addPersonActionText.visibility = View.GONE
         mHomeFab.visibility = View.GONE
@@ -75,6 +81,8 @@ class DetailUserFragment : Fragment() {
                 homeActionText.visibility = View.VISIBLE
                 mAddAlarmFab.show()
                 addAlarmActionText.visibility = View.VISIBLE
+                addLogoutActionText.visibility = View.VISIBLE
+                mAddLogoutFab.show()
                 true
             } else {
                 mAddPersonFab.hide()
@@ -83,6 +91,8 @@ class DetailUserFragment : Fragment() {
                 homeActionText.visibility = View.GONE
                 mAddAlarmFab.hide()
                 addAlarmActionText.visibility = View.GONE
+                addLogoutActionText.visibility = View.GONE
+                mAddLogoutFab.hide()
                 false
             }).also { isAllFabsVisible = it }
         })
@@ -102,8 +112,13 @@ class DetailUserFragment : Fragment() {
                 DetailUserFragmentDirections.actionFragmentDetailUserToHomeFragment()
             )
         }
+        mAddLogoutFab.setOnClickListener {
+            findNavController().navigate(
+                DetailUserFragmentDirections.actionFragmentDetailUserToLoginFragment()
+            )
+        }
         view.findViewById<TextView>(R.id.id_name_profil).text = userInfo.user.username
-        view.findViewById<TextView>(R.id.id_number_profil).text = "E-MAIL: "+userInfo.user.email
+        view.findViewById<TextView>(R.id.id_number_profil).text = "E-MAIL: " + userInfo.user.email
         getGame(view)
     }
 

@@ -5,67 +5,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameInfoFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:id="@+id/id_constraint_block"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@drawable/signup_web"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:padding="10dp">
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/login_web"
+                />
+
             <TextView
                 android:id="@+id/title_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/item_name_game"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:background="@color/primary"
+                />
+
             <TextView
                 android:id="@+id/ranking_by_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15sp"
-                android:text="50ième / 70"
-                android:textSize="18sp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="10dp"
                 android:paddingHorizontal="10sp"
                 android:paddingVertical="5sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/radius_cancel"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="50ième / 70"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:background="@color/primary"/>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabBackground="@color/white"
-                app:tabGravity="fill"
-                app:tabMode="fixed"
-                app:tabTextColor="@color/primary"
-                android:background="@color/primary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/id_constraint_block"
-                />
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-                android:background="@color/third">
+        </RelativeLayout>
 
-            </androidx.viewpager.widget.ViewPager>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_constraint_block"
+            app:tabBackground="@color/white"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/primary" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/third"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+        </androidx.viewpager.widget.ViewPager>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/float_button" />
 </FrameLayout>

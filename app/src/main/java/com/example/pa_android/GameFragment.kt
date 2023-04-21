@@ -18,7 +18,8 @@ class GameFragment : Fragment() {
     private lateinit var mAddPersonFab: FloatingActionButton
     private lateinit var mHomeFab: FloatingActionButton
     private lateinit var homeActionText: TextView
-
+    private lateinit var addLogoutActionText: TextView
+    private lateinit var mAddLogoutFab: FloatingActionButton
     // These are taken to make visible and invisible along with FABs
     private lateinit var addPersonActionText: TextView
 
@@ -57,7 +58,10 @@ class GameFragment : Fragment() {
         view.findViewById<FloatingActionButton?>(R.id.add_alarm_fab).visibility = View.GONE
         view.findViewById<TextView?>(R.id.add_alarm_action_text).visibility = View.GONE
         mAddPersonFab = view.findViewById(R.id.add_person_fab)
-
+        addLogoutActionText = view.findViewById(R.id.add_logout_action_text)
+        mAddLogoutFab = view.findViewById(R.id.add_logout_fab)
+        mAddLogoutFab.visibility = View.GONE
+        addLogoutActionText.visibility = View.GONE
         addPersonActionText = view.findViewById(R.id.add_person_action_text)
         mHomeFab = view.findViewById(R.id.add_home_fab)
         homeActionText = view.findViewById(R.id.add_home_action_text)
@@ -74,12 +78,16 @@ class GameFragment : Fragment() {
                 addPersonActionText.visibility = View.VISIBLE
                 mHomeFab.show()
                 homeActionText.visibility = View.VISIBLE
+                addLogoutActionText.visibility = View.VISIBLE
+                mAddLogoutFab.show()
                 true
             } else {
                 mAddPersonFab.hide()
                 addPersonActionText.visibility = View.GONE
                 mHomeFab.hide()
                 homeActionText.visibility = View.GONE
+                addLogoutActionText.visibility = View.GONE
+                mAddLogoutFab.hide()
                 false
             }).also { isAllFabsVisible = it }
         })
@@ -94,7 +102,11 @@ class GameFragment : Fragment() {
                 GameFragmentDirections.actionGameFragmentToHomeFragment()
             )
         }
-
+        mAddLogoutFab.setOnClickListener {
+            findNavController().navigate(
+                GameFragmentDirections.actionGameFragmentToLoginFragment()
+            )
+        }
 //
         getGame(view)
     }

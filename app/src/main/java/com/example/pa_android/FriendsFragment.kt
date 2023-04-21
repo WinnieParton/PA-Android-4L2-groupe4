@@ -61,7 +61,8 @@ class FriendsFragment : Fragment() {
     private lateinit var mAddFab: FloatingActionButton
     private lateinit var mAddAlarmFab: FloatingActionButton
     private lateinit var mAddPersonFab: FloatingActionButton
-
+    private lateinit var addLogoutActionText: TextView
+    private lateinit var mAddLogoutFab: FloatingActionButton
     // These are taken to make visible and invisible along with FABs
     private lateinit var addAlarmActionText: TextView
     private lateinit var addPersonActionText: TextView
@@ -88,7 +89,10 @@ class FriendsFragment : Fragment() {
         // FAB button
         mAddAlarmFab = view.findViewById(R.id.add_alarm_fab)
         mAddPersonFab = view.findViewById(R.id.add_person_fab)
-
+        addLogoutActionText = view.findViewById(R.id.add_logout_action_text)
+        mAddLogoutFab = view.findViewById(R.id.add_logout_fab)
+        mAddLogoutFab.visibility = View.GONE
+        addLogoutActionText.visibility = View.GONE
         addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
         addPersonActionText = view.findViewById(R.id.add_person_action_text)
         view.findViewById<FloatingActionButton?>(R.id.add_home_fab).visibility = View.GONE
@@ -106,14 +110,16 @@ class FriendsFragment : Fragment() {
                 mAddPersonFab.show()
                 addAlarmActionText.visibility = View.VISIBLE
                 addPersonActionText.visibility = View.VISIBLE
-
+                addLogoutActionText.visibility = View.VISIBLE
+                mAddLogoutFab.show()
                 true
             } else {
                 mAddAlarmFab.hide()
                 mAddPersonFab.hide()
                 addAlarmActionText.visibility = View.GONE
                 addPersonActionText.visibility = View.GONE
-
+                addLogoutActionText.visibility = View.GONE
+                mAddLogoutFab.hide()
                 false
             }).also { isAllFabsVisible = it }
         })
@@ -127,6 +133,11 @@ class FriendsFragment : Fragment() {
         mAddAlarmFab.setOnClickListener {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToGameFragment()
+            )
+        }
+        mAddLogoutFab.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToLoginFragment()
             )
         }
 //
