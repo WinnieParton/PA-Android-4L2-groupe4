@@ -19,10 +19,10 @@ class UserViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     fun updateView(user: User) {
-        user_name.text = user.username
+        user_name.text = user.name
         user_email.text = user.email
 
-        if (user.status == "ok") {
+        /*if (user.status == "ok") {
             val redColor = ContextCompat.getColor(itemView.context, R.color.bg_green)
             val colorStateList = ColorStateList.valueOf(redColor)
             card_btn.backgroundTintMode = PorterDuff.Mode.SRC_ATOP
@@ -44,6 +44,6 @@ class UserViewHolder(v: View) : RecyclerView.ViewHolder(v) {
                     R.drawable.cancel
                 )
             );
-        }
+        }*/
     }
 }

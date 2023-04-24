@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class MessageListFragment : Fragment() {
+class MessageListFragment(user: User) : Fragment() {
+    val userInfo =user
     private var chats: List<Chat> = listOf(
         Chat(
             1,
@@ -105,14 +106,14 @@ class MessageListFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment()
+                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment(userInfo)
             )
-            //Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
+
         }
 
         mAddAlarmFab.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToGameFragment()
+                HomeFragmentDirections.actionHomeFragmentToGameFragment(userInfo)
             )
         }
         mAddLogoutFab.setOnClickListener {

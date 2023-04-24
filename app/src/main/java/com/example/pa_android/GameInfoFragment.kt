@@ -109,18 +109,18 @@ class GameInfoFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-                GameInfoFragmentDirections.actionGameInfoFragmentToResearchUserFragment()
+                GameInfoFragmentDirections.actionGameInfoFragmentToResearchUserFragment(game.user)
             )
 
         }
         mAddAlarmFab.setOnClickListener {
             findNavController().navigate(
-                GameInfoFragmentDirections.actionGameInfoFragmentToGameFragment()
+                GameInfoFragmentDirections.actionGameInfoFragmentToGameFragment(game.user)
             )
         }
         mHomeFab.setOnClickListener {
             findNavController().navigate(
-                GameInfoFragmentDirections.actionGameInfoFragmentToHomeFragment()
+                GameInfoFragmentDirections.actionGameInfoFragmentToHomeFragment(game.user)
             )
         }
         mAddLogoutFab.setOnClickListener {

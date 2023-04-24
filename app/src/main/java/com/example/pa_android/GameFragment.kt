@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,7 +23,7 @@ class GameFragment : Fragment() {
     private lateinit var mAddLogoutFab: FloatingActionButton
     // These are taken to make visible and invisible along with FABs
     private lateinit var addPersonActionText: TextView
-
+    private val user: GameFragmentArgs by navArgs()
     // to check whether sub FAB buttons are visible or not.
     private var isAllFabsVisible: Boolean? = null
     private var games: List<Game> = listOf(
@@ -93,13 +94,13 @@ class GameFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-                GameFragmentDirections.actionGameFragmentToResearchUserFragment()
+                GameFragmentDirections.actionGameFragmentToResearchUserFragment(user.user)
             )
 
         }
         mHomeFab.setOnClickListener {
             findNavController().navigate(
-                GameFragmentDirections.actionGameFragmentToHomeFragment()
+                GameFragmentDirections.actionGameFragmentToHomeFragment(user.user)
             )
         }
         mAddLogoutFab.setOnClickListener {
@@ -121,7 +122,7 @@ class GameFragment : Fragment() {
     private val listener = GamesAdapter.OnClickListener { game ->
         // Add action to navigate
         findNavController().navigate(
-            GameFragmentDirections.actionGameFragmentToGameInfoFragment(game)
+            GameFragmentDirections.actionGameFragmentToGameInfoFragment(game,user.user)
         )
     }
 }

@@ -18,7 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class DashboardFragment : Fragment() {
+class DashboardFragment(user: User) : Fragment() {
+    val userInfo = user
     private var games: List<Game> = listOf(
         Game(
             1,
@@ -77,6 +78,10 @@ class DashboardFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.findViewById<TextView>(R.id.id_name_profil).text=userInfo.name
+        view.findViewById<TextView>(R.id.id_number_profil).text="E-MAIL: "+userInfo.email
+        view.findViewById<TextView>(R.id.id_value_friend).text="0"
+
         mAddFab = view.findViewById(R.id.add_fab)
 
         // FAB button
@@ -122,14 +127,14 @@ class DashboardFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment()
+                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment(userInfo)
             )
             //Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
         }
 
         mAddAlarmFab.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToGameFragment()
+                HomeFragmentDirections.actionHomeFragmentToGameFragment(userInfo)
             )
         }
 
@@ -147,12 +152,12 @@ class DashboardFragment : Fragment() {
         relativeLayout.background = drawable1
         view.findViewById<ImageView>(R.id.id_setting).setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToProfilFragment()
+                HomeFragmentDirections.actionHomeFragmentToProfilFragment(userInfo)
             )
         }
         relativeLayout.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment()
+                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment(userInfo)
             )
         }
         getGame(view)
@@ -168,7 +173,7 @@ class DashboardFragment : Fragment() {
     private val listener = GamesAdapter.OnClickListener { game ->
         // Add action to navigate
         findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToGameInfoFragment(game)
+            HomeFragmentDirections.actionHomeFragmentToGameInfoFragment(game,userInfo)
         )
     }
 }

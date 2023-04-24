@@ -30,25 +30,25 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    fun setupBottomNavigationBar() {
+    fun setupBottomNavigationBar(user: User) {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, DashboardFragment())
+                        .replace(R.id.fragment_container, DashboardFragment(user))
                         .commit()
                     true
                 }
                 R.id.sms -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, MessageListFragment())
+                        .replace(R.id.fragment_container, MessageListFragment(user))
                         .commit()
                     true
                 }
                 R.id.friend -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, FriendsFragment())
+                        .replace(R.id.fragment_container, FriendsFragment(user))
                         .commit()
                     true
                 }
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         // Replace the initial container view with the desired fragment
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, DashboardFragment())
+            .replace(R.id.fragment_container, DashboardFragment(user))
             .commit()
     }
 

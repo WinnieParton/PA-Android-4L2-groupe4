@@ -14,86 +14,32 @@ class GameInfoClassementFragment : Fragment() {
         Ranking(
             1,
             User(
-                "koum@gmail.com",
+                "122",
                 "Winnie Ali",
-                5,
-                "winnie123456789",
-                "https://w7.pngwing.com/pngs/886/300/png-transparent-user-other-furniture-child-thumbnail.png",
-                "ok"
+                "koum@gmail.com",
+                "winnie123456789"
             ),
             700
         ),
         Ranking(
             2,
             User(
+                "1222",
                 "koum@gmail.com",
                 "Mohamed Youss",
-                5,
-                "winnie123456789",
-                "https://w7.pngwing.com/pngs/886/300/png-transparent-user-other-furniture-child-thumbnail.png",
-                "ok"
+                "winnie123456789"
             ),
             900
         ),
         Ranking(
             3,
             User(
+                "1922",
                 "koum@gmail.com",
                 "Anatol Bagh",
-                5,
-                "winnie123456789",
-                "https://w7.pngwing.com/pngs/886/300/png-transparent-user-other-furniture-child-thumbnail.png",
-                "ok"
+                "winnie123456789"
             ),
             750
-        ),
-        Ranking(
-            4,
-            User(
-                "koum@gmail.com",
-                "Carim Al",
-                5,
-                "winnie123456789",
-                "https://w7.pngwing.com/pngs/886/300/png-transparent-user-other-furniture-child-thumbnail.png",
-                "ok"
-            ),
-            7900
-        ),
-        Ranking(
-            5,
-            User(
-                "koum@gmail.com",
-                "Yami j",
-                5,
-                "winnie123456789",
-                "https://w7.pngwing.com/pngs/886/300/png-transparent-user-other-furniture-child-thumbnail.png",
-                "ok"
-            ),
-            746
-        ),
-        Ranking(
-            6,
-            User(
-                "koum@gmail.com",
-                "Balooi Jds",
-                5,
-                "winnie123456789",
-                "https://w7.pngwing.com/pngs/886/300/png-transparent-user-other-furniture-child-thumbnail.png",
-                "ok"
-            ),
-            900
-        ),
-        Ranking(
-            7,
-            User(
-                "koum@gmail.com",
-                "Rien du Tout",
-                5,
-                "winnie123456789",
-                "https://w7.pngwing.com/pngs/886/300/png-transparent-user-other-furniture-child-thumbnail.png",
-                "ok"
-            ),
-            850
         ),
     )
     private lateinit var rv: RecyclerView

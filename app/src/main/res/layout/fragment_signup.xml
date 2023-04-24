@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,163 +9,174 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".SignupFragment">
-
-    <androidx.cardview.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
+        android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
-                android:src="@drawable/ic_logo" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
 
-            <TextView
-                android:id="@+id/loginText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:text="@string/name_account"
-                android:textAlignment="center"
-                android:textColor="@color/primary"
-                android:textSize="@dimen/size_text_title_edit_text" />
-
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:drawableStart="@drawable/ic_user"
-                android:drawablePadding="@dimen/drawable_padding_icon"
-                android:hint="@string/plaholder_pseudo"
-                android:inputType="text"
-                android:padding="@dimen/pading_edittext"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/size_text_regular" />
-
-            <TextView
-                android:id="@+id/title_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="@dimen/marging_text"
-                android:text="@string/title_email"
-                android:textAlignment="center"
-                android:textColor="@color/primary"
-                android:textSize="@dimen/size_text_title_edit_text" />
-
-            <EditText
-                android:id="@+id/email_edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:drawableStart="@drawable/ic_user"
-                android:drawablePadding="@dimen/drawable_padding_icon"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:padding="@dimen/pading_edittext"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/size_text_regular" />
-
-            <TextView
-                android:id="@+id/passwordText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="@dimen/marging_text"
-                android:text="@string/name_password"
-                android:textAlignment="center"
-                android:textColor="@color/primary"
-                android:textSize="@dimen/size_text_title_edit_text" />
-
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:drawableStart="@drawable/ic_lock"
-                android:drawablePadding="@dimen/drawable_padding_icon"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:padding="@dimen/pading_edittext"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/size_text_regular" />
-
-            <TextView
-                android:id="@+id/title_confirm_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="@dimen/marging_text"
-                android:text="@string/confirm_password"
-                android:textAlignment="center"
-                android:textColor="@color/primary"
-                android:textSize="@dimen/size_text_title_edit_text" />
-
-            <EditText
-                android:id="@+id/confirm_password_edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:drawableStart="@drawable/ic_lock"
-                android:drawablePadding="@dimen/drawable_padding_icon"
-                android:hint="@string/plaholder_confirm_password"
-                android:inputType="textPassword"
-                android:padding="@dimen/pading_edittext"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/size_text_regular" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:src="@drawable/ic_logo" />
 
                 <TextView
-                    android:id="@+id/buttoncancel"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/loginText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/radius_cancel"
-                    android:paddingHorizontal="20sp"
-                    android:paddingVertical="@dimen/pading_edittext"
-                    android:text="@string/cancel"
+                    android:layout_marginVertical="8dp"
+                    android:text="@string/name_account"
+                    android:textAlignment="center"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/size_text_title_edit_text"
-                    app:cornerRadius="@dimen/pading_edittext"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="@dimen/size_text_title_edit_text" />
+
+                <EditText
+                    android:id="@+id/editTextUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableStart="@drawable/ic_user"
+                    android:drawablePadding="@dimen/drawable_padding_icon"
+                    android:hint="@string/plaholder_pseudo"
+                    android:inputType="text"
+                    android:padding="@dimen/pading_edittext"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/size_text_regular" />
 
                 <TextView
-                    android:id="@+id/buttonvalide"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/title_email"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/radius_validate"
-                    android:paddingHorizontal="20sp"
-                    android:paddingVertical="@dimen/pading_edittext"
-                    android:text="@string/validate"
-                    android:textColor="@color/third"
-                    android:textSize="@dimen/size_text_title_edit_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="@dimen/marging_text"
+                    android:text="@string/title_email"
+                    android:textAlignment="center"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/size_text_title_edit_text" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <EditText
+                    android:id="@+id/editTextTextEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableStart="@drawable/ic_user"
+                    android:drawablePadding="@dimen/drawable_padding_icon"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/pading_edittext"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/size_text_regular" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/passwordText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="@dimen/marging_text"
+                    android:text="@string/name_password"
+                    android:textAlignment="center"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/size_text_title_edit_text" />
 
-    </androidx.cardview.widget.CardView>
+                <EditText
+                    android:id="@+id/editTextTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:drawablePadding="@dimen/drawable_padding_icon"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/pading_edittext"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/size_text_regular" />
+
+                <TextView
+                    android:id="@+id/title_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="@dimen/marging_text"
+                    android:text="@string/confirm_password"
+                    android:textAlignment="center"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/size_text_title_edit_text" />
+
+                <EditText
+                    android:id="@+id/editTextVerificationPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:drawablePadding="@dimen/drawable_padding_icon"
+                    android:hint="@string/plaholder_confirm_password"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/pading_edittext"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/size_text_regular" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp">
+                    <include layout="@layout/loader" android:id="@+id/prog" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp">
+
+                    <TextView
+                        android:id="@+id/buttoncancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/radius_cancel"
+                        android:paddingHorizontal="20sp"
+                        android:paddingVertical="@dimen/pading_edittext"
+                        android:text="@string/cancel"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/size_text_title_edit_text"
+                        app:cornerRadius="@dimen/pading_edittext"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/buttonvalide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/radius_validate"
+                        android:paddingHorizontal="20sp"
+                        android:paddingVertical="@dimen/pading_edittext"
+                        android:text="@string/validate"
+                        android:textColor="@color/third"
+                        android:textSize="@dimen/size_text_title_edit_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

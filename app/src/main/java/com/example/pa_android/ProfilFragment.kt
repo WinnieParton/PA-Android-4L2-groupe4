@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ProfilFragment : Fragment() {
@@ -15,6 +16,7 @@ class ProfilFragment : Fragment() {
     private lateinit var mHomeFab: FloatingActionButton
     private lateinit var homeActionText: TextView
     private var isAllFabsVisible: Boolean? = null
+    private val user: ProfilFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,12 +55,12 @@ class ProfilFragment : Fragment() {
 
         mHomeFab.setOnClickListener {
             findNavController().navigate(
-                ProfilFragmentDirections.actionProfilFragmentToHomeFragment()
+                ProfilFragmentDirections.actionProfilFragmentToHomeFragment(user.user)
             )
         }
         view.findViewById<TextView>(R.id.buttoncancel).setOnClickListener {
             findNavController().navigate(
-                ProfilFragmentDirections.actionProfilFragmentToHomeFragment()
+                ProfilFragmentDirections.actionProfilFragmentToHomeFragment(user.user)
             )
         }
 
