@@ -129,6 +129,7 @@ class ResearchUserFragment : Fragment() {
                         progressBar.visibility = View.GONE
                         constraint.visibility = View.VISIBLE
                         view.findViewById<ConstraintLayout>(R.id.constraint_id_recy).visibility=View.VISIBLE
+                        dataSearch.clear()
                         dataSearch.add(
                             User(
                                 response.get("id").asString,
@@ -161,8 +162,25 @@ class ResearchUserFragment : Fragment() {
         rv.adapter = UsersAdapter(users, listener, "search")
     }
 
-    private val listener = UsersAdapter.OnClickListener { user ->
+    private val listener = UsersAdapter.OnClickListener { us ->
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                val response = ApiClient.addFriend(AddFriendData(us.id, "PENDING"), user.user.id)
+                withContext(Dispatchers.Main) {
+                    println("dffffffffffff  "+response)
+                    Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                activity?.runOnUiThread {
 
+                    Toast.makeText(
+                        requireContext(),
+                        "Error server ${e.message}", Toast.LENGTH_SHORT
+                    ).show()
+                }
+                println("Error connecting to server: ${e.message}")
+            }
+        }
        /* if (user.status == "ok")
             Toast.makeText(requireContext(), "Person Already Added", Toast.LENGTH_SHORT).show()
         else if (user.status == "no")

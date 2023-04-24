@@ -1,5 +1,6 @@
 package com.example.projetfinaljeu
 
+import com.example.pa_android.AddFriendData
 import com.example.pa_android.LoginData
 import com.example.pa_android.SignupData
 import com.google.gson.JsonObject
@@ -26,5 +27,9 @@ object ApiClient {
 
     suspend fun researchByName(textsearch: String): JsonObject {
         return api.getresearchByName(textsearch).await()
+    }
+
+    suspend fun addFriend(data: AddFriendData, iduser: String): JsonObject {
+        return api.postaddFriend(data, iduser).await()
     }
 }
