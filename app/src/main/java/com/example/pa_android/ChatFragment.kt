@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,7 +72,10 @@ class ChatFragment : Fragment() {
             view.findViewById<EditText>(R.id.message_text).text.clear()
         }
     }
-
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
     private fun getChat(view: View) {
         rv = view.findViewById<RecyclerView>(R.id.chat_view)
         rv.layoutManager = LinearLayoutManager(context)

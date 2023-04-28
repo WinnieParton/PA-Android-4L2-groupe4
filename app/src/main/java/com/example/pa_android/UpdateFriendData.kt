@@ -4,6 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class AddFriendData(
-    val receiver: String
+data class UpdateFriendData(
+    val receiver: String,
+    val status: String
 ) : Parcelable

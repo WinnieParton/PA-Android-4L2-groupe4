@@ -17,7 +17,8 @@ class GameInfoClassementFragment : Fragment() {
                 "122",
                 "Winnie Ali",
                 "koum@gmail.com",
-                "winnie123456789"
+                "winnie123456789",
+                ""
             ),
             700
         ),
@@ -27,7 +28,8 @@ class GameInfoClassementFragment : Fragment() {
                 "1222",
                 "koum@gmail.com",
                 "Mohamed Youss",
-                "winnie123456789"
+                "winnie123456789",
+                ""
             ),
             900
         ),
@@ -37,7 +39,8 @@ class GameInfoClassementFragment : Fragment() {
                 "1922",
                 "koum@gmail.com",
                 "Anatol Bagh",
-                "winnie123456789"
+                "winnie123456789",
+                ""
             ),
             750
         ),

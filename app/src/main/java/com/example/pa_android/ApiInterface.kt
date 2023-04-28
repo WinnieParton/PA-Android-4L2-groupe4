@@ -3,6 +3,7 @@ package com.example.projetfinaljeu
 import com.example.pa_android.AddFriendData
 import com.example.pa_android.LoginData
 import com.example.pa_android.SignupData
+import com.example.pa_android.UpdateFriendData
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Deferred
@@ -23,4 +24,12 @@ interface ApiInterface {
     @POST("friend/{iduser}")
     fun postaddFriend(@Body signupData: AddFriendData, @Path("iduser") iduser: String): Deferred<JsonObject>
 
+    @PUT("friend/{iduser}/answer")
+    fun putUpdateFriend(@Body signupData: UpdateFriendData, @Path("iduser") iduser: String): Deferred<JsonObject>
+
+    @GET("friend/sent/{textsearch}")
+    fun getfriendsSend(@Path("textsearch") textsearch: String?): Deferred<JsonArray>
+
+    @GET("friend/received/{textsearch}")
+    fun getfriendsReceived(@Path("textsearch") textsearch: String?): Deferred<JsonArray>
 }

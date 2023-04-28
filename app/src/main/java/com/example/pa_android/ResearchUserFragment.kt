@@ -135,7 +135,8 @@ class ResearchUserFragment : Fragment() {
                                 response.get("id").asString,
                                 response.get("name").asString,
                                 response.get("email").asString,
-                                response.get("role").asString
+                                response.get("role").asString,
+                                ""
                             )
                         )
                         getUser(dataSearch, view)
@@ -157,22 +158,24 @@ class ResearchUserFragment : Fragment() {
     }
 
     private fun getUser(users: List<User>,view: View) {
+        if(users.size ==0)
+            view.findViewById<ConstraintLayout>(R.id.constraint_id_recy).visibility = View.GONE
         rv = view.findViewById(R.id.list_user_search_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
         rv.adapter = UsersAdapter(users, listener, "search")
     }
 
-    private val listener = UsersAdapter.OnClickListener { us ->
+    private val listener = UsersAdapter.OnClickListener { us, status ->
         GlobalScope.launch(Dispatchers.Default) {
             try {
-                val response = ApiClient.addFriend(AddFriendData(us.id, "PENDING"), user.user.id)
+                ApiClient.addFriend(AddFriendData(us.id), user.user.id)
                 withContext(Dispatchers.Main) {
-                    println("dffffffffffff  "+response)
                     Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
                 }
+                val users: List<User> = listOf()
+                getUser(users, requireView())
             } catch (e: Exception) {
                 activity?.runOnUiThread {
-
                     Toast.makeText(
                         requireContext(),
                         "Error server ${e.message}", Toast.LENGTH_SHORT
@@ -181,15 +184,6 @@ class ResearchUserFragment : Fragment() {
                 println("Error connecting to server: ${e.message}")
             }
         }
-       /* if (user.status == "ok")
-            Toast.makeText(requireContext(), "Person Already Added", Toast.LENGTH_SHORT).show()
-        else if (user.status == "no")
-            Toast.makeText(requireContext(), "You Can Add This Person", Toast.LENGTH_SHORT).show()
-        else Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()*/
-        // Add action to navigate
-        //findNavController().navigate(
-        //GameHomeFragmentDirections.actionGameHomeFragmentToGameDetailFragment(game, userArgs.userArgs)
-        //)
 
     }
 }

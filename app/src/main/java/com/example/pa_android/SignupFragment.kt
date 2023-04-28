@@ -116,7 +116,8 @@ class SignupFragment : Fragment() {
                                     response.get("id").asString,
                                     response.get("name").asString,
                                     response.get("email").asString,
-                                    response.get("role").asString
+                                    response.get("role").asString,
+                                    ""
                                 )
                             )
                         )

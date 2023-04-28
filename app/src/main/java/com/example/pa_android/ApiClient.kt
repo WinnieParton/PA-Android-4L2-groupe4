@@ -3,6 +3,8 @@ package com.example.projetfinaljeu
 import com.example.pa_android.AddFriendData
 import com.example.pa_android.LoginData
 import com.example.pa_android.SignupData
+import com.example.pa_android.UpdateFriendData
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
@@ -11,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
 
     private val api = Retrofit.Builder()
-        .baseUrl("http:/192.168.1.4:8080/")
+        .baseUrl("http:/192.168.100.48:8080/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
@@ -31,5 +33,17 @@ object ApiClient {
 
     suspend fun addFriend(data: AddFriendData, iduser: String): JsonObject {
         return api.postaddFriend(data, iduser).await()
+    }
+
+    suspend fun answerFriend(data: UpdateFriendData, iduser: String): JsonObject {
+        return api.putUpdateFriend(data, iduser).await()
+    }
+
+    suspend fun listFriendSend(textsearch: String): JsonArray {
+        return api.getfriendsSend(textsearch).await()
+    }
+
+    suspend fun listFriendReceived(textsearch: String): JsonArray {
+        return api.getfriendsReceived(textsearch).await()
     }
 }

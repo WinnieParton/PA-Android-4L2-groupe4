@@ -134,7 +134,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp"
+                    android:visibility="gone">
                     <include layout="@layout/loader" android:id="@+id/prog" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

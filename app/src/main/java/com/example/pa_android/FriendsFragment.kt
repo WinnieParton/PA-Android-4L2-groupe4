@@ -1,21 +1,29 @@
 package com.example.pa_android
 
 import android.os.Bundle
+import android.telecom.DisconnectCause.REJECTED
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.JsonParser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FriendsFragment(user: User) : Fragment() {
     val userInfo = user
     private lateinit var rv: RecyclerView
-    private lateinit var users: MutableList<User>
 
     // Make sure to use the FloatingActionButton for all the FABs
     private lateinit var mAddFab: FloatingActionButton
@@ -99,22 +107,93 @@ class FriendsFragment(user: User) : Fragment() {
                 HomeFragmentDirections.actionHomeFragmentToLoginFragment()
             )
         }
+        getList()
 //
-        getUser(view)
+
 
     }
 
-    private fun getUser(view: View) {
-        rv = view.findViewById<RecyclerView>(R.id.list_user_recyclerview)
+    private  fun getList(){
+        val view = requireView()
+        val dataSearch = mutableListOf<User>()
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                val response = ApiClient.listFriendSend(userInfo.id)
+                val newdata = JsonParser().parse(response.toString()).asJsonArray
+                for (jsonElement in newdata) {
+                    val it = jsonElement.asJsonObject
+                    val f = JsonParser().parse(it.get("friend").toString()).asJsonObject
+                    if(it.get("status").asString == "ACCEPTED")
+                        dataSearch.add(
+                            User(
+                                f.get("id").asString,
+                                f.get("name").asString,
+                                f.get("email").asString,
+                                f.get("role").asString,
+                                it.get("status").asString
+                            )
+                        )
+                }
+
+            /*    val response1 = ApiClient.listFriendReceived(userInfo.id)
+                val newdata1 = JsonParser().parse(response1.toString()).asJsonArray
+                for (jsonElement in newdata1) {
+                    val it = jsonElement.asJsonObject
+                    val f = JsonParser().parse(it.get("user").toString()).asJsonObject
+                    if(it.get("status").asString == "ACCEPTED")
+                        dataSearch.add(
+                            User(
+                                f.get("id").asString,
+                                f.get("name").asString,
+                                f.get("email").asString,
+                                f.get("role").asString,
+                                it.get("status").asString
+                            )
+                        )
+                }
+*/
+                withContext(Dispatchers.Main) {
+                    if(dataSearch.size == 0)
+                        view.findViewById<TextView>(R.id.no_game).visibility =  View.VISIBLE
+                    else view.findViewById<TextView>(R.id.no_game).visibility =  View.GONE
+
+                    getUser(dataSearch, view)
+                }
+            } catch (e: Exception) {
+                println("${e.message}")
+            }
+        }
+    }
+    private fun getUser(uses: List<User>, view: View) {
+
+        rv = view.findViewById(R.id.list_user_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
-        rv.adapter = UsersAdapter(users, listener, "list")
+        rv.adapter = UsersAdapter(uses, listener, "list")
     }
 
-    private val listener = UsersAdapter.OnClickListener { user ->
-        // Add action to navigate
-        findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToFragmentDetailUser(user)
-        )
+    private val listener = UsersAdapter.OnClickListener { user, status ->
 
+        if(status =="ACCEPTED" || status =="REJECTED"){
+            answer(user, status)
+        }else
+        // Add action to navigate
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToFragmentDetailUser(user)
+            )
+
+    }
+
+    private  fun answer(user: User, status: String){
+
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                ApiClient.answerFriend(UpdateFriendData(user.id, status),userInfo.id)
+                withContext(Dispatchers.Main) {
+                    getList()
+                }
+            } catch (e: Exception) {
+                println("Error connecting to server: ${e.message}")
+            }
+        }
     }
 }

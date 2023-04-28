@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="40dp"
             android:backgroundTint="@color/bg_gray"
             android:orientation="vertical"
             app:cardCornerRadius="15dp"
@@ -85,6 +85,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/add" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_btn_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/bg_red"
+            android:orientation="vertical"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="3dp">
+            <ImageView
+                android:id="@+id/img_card_no"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/cancel" />
         </androidx.cardview.widget.CardView>
 
         <View

@@ -172,7 +172,8 @@ class LoginFragment : Fragment() {
                                         jsonObject.getString("id"),
                                         jsonObject.getString("name"),
                                         jsonObject.getString("email"),
-                                        jsonObject.getString("role")
+                                        jsonObject.getString("role"),
+                                        ""
                                     )
                                 )
                             )

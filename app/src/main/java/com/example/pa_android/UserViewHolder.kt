@@ -15,35 +15,30 @@ class UserViewHolder(v: View) : RecyclerView.ViewHolder(v) {
     private val user_email = v.findViewById<TextView>(R.id.user_email)
     private val img_card_btn = v.findViewById<ImageView>(R.id.img_card_btn)
     private val card_btn = v.findViewById<CardView>(R.id.card_btn)
+    private val card_btn_no = v.findViewById<CardView>(R.id.card_btn_no)
 
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
-    fun updateView(user: User) {
+    fun updateView(user: User, type: String) {
         user_name.text = user.name
         user_email.text = user.email
-
-        /*if (user.status == "ok") {
-            val redColor = ContextCompat.getColor(itemView.context, R.color.bg_green)
-            val colorStateList = ColorStateList.valueOf(redColor)
-            card_btn.backgroundTintMode = PorterDuff.Mode.SRC_ATOP
-            card_btn.backgroundTintList = colorStateList
-            img_card_btn.setImageDrawable(
-                ContextCompat.getDrawable(
-                    itemView.context,
-                    R.drawable.task_alt
-                )
-            );
-        } else if (user.status == "no") {
-            val redColor = ContextCompat.getColor(itemView.context, R.color.bg_red)
-            val colorStateList = ColorStateList.valueOf(redColor)
-            card_btn.backgroundTintMode = PorterDuff.Mode.SRC_ATOP
-            card_btn.backgroundTintList = colorStateList
-            img_card_btn.setImageDrawable(
-                ContextCompat.getDrawable(
-                    itemView.context,
-                    R.drawable.cancel
-                )
-            );
-        }*/
+        if(type != "search") {
+            if (user.status == "PENDING") {
+                val redColor = ContextCompat.getColor(itemView.context, R.color.bg_green)
+                val colorStateList = ColorStateList.valueOf(redColor)
+                card_btn.backgroundTintMode = PorterDuff.Mode.SRC_ATOP
+                card_btn.backgroundTintList = colorStateList
+                img_card_btn.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.task_alt
+                    )
+                );
+                card_btn_no.visibility = View.VISIBLE
+            } else {
+                card_btn_no.visibility = View.GONE
+                card_btn.visibility = View.GONE
+            }
+        }
     }
 }
