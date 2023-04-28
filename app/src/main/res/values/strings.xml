@@ -40,5 +40,14 @@
     <string name="title_list_game">List of games</string>
     <string name="search_user">Search for a user</string>
     <string name="my_game">My List of Game</string>
+    <string name="mdp">Please enter your email to reset your password</string>
+    <string name="renvoyer_code">Resend my password</string>
+    <string name="message_send">An email has been sent to your email address, please login to complete the password reset process</string>
+    <string name="invalid_email">Invalid email address</string>
+    <string name="invalid_password">Password must be at least 8 characters</string>
+    <string name="invalid_password_confir">The password entered does not match!</string>
+    <string name="message_register">Fail to register</string>
+    <string name="message_login">Email or password incorrect</string>
+    <string name="message_login_home">You must be logged in to access home page</string>
 
 </resources>

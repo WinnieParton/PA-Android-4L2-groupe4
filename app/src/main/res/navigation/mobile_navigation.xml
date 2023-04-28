@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profilFragment"
             app:destination="@id/profilFragment" />
+        <argument
+            android:name="User"
+            app:argType="com.example.pa_android.User" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
@@ -81,6 +84,9 @@
         <action
             android:id="@+id/action_profilFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.example.pa_android.User" />
     </fragment>
     <fragment
         android:id="@+id/researchUserFragment"
@@ -96,6 +102,9 @@
         <action
             android:id="@+id/action_researchUserFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.example.pa_android.User" />
     </fragment>
     <fragment
         android:id="@+id/fragment_friends"
@@ -143,6 +152,9 @@
         <action
             android:id="@+id/action_game_fragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.example.pa_android.User" />
     </fragment>
     <fragment
         android:id="@+id/game_info_fragment"
@@ -164,6 +176,9 @@
         <action
             android:id="@+id/action_game_info_fragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.example.pa_android.User" />
     </fragment>
     <fragment
         android:id="@+id/gameInfoClassementFragment"
@@ -180,6 +195,6 @@
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.pa_android.ChatFragment"
-        android:label="ChatFragment"
+        android:label="Chat"
         tools:layout="@layout/fragment_chat"></fragment>
 </navigation>

@@ -85,16 +85,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
             android:background="@drawable/card_view_top_corners_2"
             android:orientation="vertical"
             android:padding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/block_setting">
+            app:layout_constraintTop_toBottomOf="@+id/block_setting"
+            android:id="@+id/constraint_id_recy"
+            android:visibility="gone">
 
             <ScrollView
                 android:layout_width="match_parent"

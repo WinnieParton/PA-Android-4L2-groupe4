@@ -13,7 +13,7 @@ class RankingViewHolder(v: View) : RecyclerView.ViewHolder(v) {
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     fun updateView(ranking: Ranking, position: Int) {
         classement_id.text = (position + 1).toString()
-        user_name.text = ranking.user?.username
+        user_name.text = ranking.user?.name
         classement_value.text = ranking.score.toString()
     }
 }

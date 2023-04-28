@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class MessageListFragment : Fragment() {
+class MessageListFragment(user: User) : Fragment() {
+    val userInfo =user
     private var chats: List<Chat> = listOf(
         Chat(
             1,
@@ -105,14 +107,14 @@ class MessageListFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment()
+                HomeFragmentDirections.actionHomeFragmentToResearchUserFragment(userInfo)
             )
-            //Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
+
         }
 
         mAddAlarmFab.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToGameFragment()
+                HomeFragmentDirections.actionHomeFragmentToGameFragment(userInfo)
             )
         }
         mAddLogoutFab.setOnClickListener {
@@ -123,7 +125,10 @@ class MessageListFragment : Fragment() {
 //
         getChat(view)
     }
-
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
     private fun getChat(view: View) {
         rv = view.findViewById<RecyclerView>(R.id.list_chat_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)

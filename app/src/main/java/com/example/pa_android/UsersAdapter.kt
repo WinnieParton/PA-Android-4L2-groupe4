@@ -23,21 +23,33 @@ class UsersAdapter(
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.updateView(users[position])
+        holder.updateView(users[position], type)
 
-        if (type == "search")
+        if (type == "search") {
+            holder.itemView.findViewById<CardView>(R.id.card_btn_no).visibility = View.GONE
+
             holder.itemView.findViewById<CardView>(R.id.card_btn).setOnClickListener {
-                onClickListener.onClick(users[position])
+                onClickListener.onClick(users[position], "PENDING")
             }
+        }
         else {
-            holder.itemView.findViewById<CardView>(R.id.card_btn).visibility = View.GONE
-            holder.itemView.findViewById<RelativeLayout>(R.id.relative_user).setOnClickListener {
-                onClickListener.onClick(users[position])
+            if(users[position].status == "ACCEPTED")
+                holder.itemView.findViewById<RelativeLayout>(R.id.relative_user).setOnClickListener {
+                    onClickListener.onClick(users[position], "")
+                }
+            if(users[position].status == "PENDING") {
+                holder.itemView.findViewById<CardView>(R.id.card_btn).setOnClickListener {
+                    onClickListener.onClick(users[position], "ACCEPTED")
+                }
+
+                holder.itemView.findViewById<CardView>(R.id.card_btn_no).setOnClickListener {
+                    onClickListener.onClick(users[position], "REJECTED")
+                }
             }
         }
     }
 
-    class OnClickListener(val clickListener: (user: User) -> Unit) {
-        fun onClick(user: User) = clickListener(user)
+    class OnClickListener(val clickListener: (user: User, status: String) -> Unit) {
+        fun onClick(user: User, status: String) = clickListener(user, status)
     }
 }

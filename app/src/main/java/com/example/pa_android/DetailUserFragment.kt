@@ -98,18 +98,18 @@ class DetailUserFragment : Fragment() {
         })
         mAddPersonFab.setOnClickListener {
             findNavController().navigate(
-                DetailUserFragmentDirections.actionFragmentDetailUserToResearchUserFragment()
+                DetailUserFragmentDirections.actionFragmentDetailUserToResearchUserFragment(userInfo.user)
             )
 
         }
         mAddAlarmFab.setOnClickListener {
             findNavController().navigate(
-                DetailUserFragmentDirections.actionFragmentDetailUserToGameFragment()
+                DetailUserFragmentDirections.actionFragmentDetailUserToGameFragment(userInfo.user)
             )
         }
         mHomeFab.setOnClickListener {
             findNavController().navigate(
-                DetailUserFragmentDirections.actionFragmentDetailUserToHomeFragment()
+                DetailUserFragmentDirections.actionFragmentDetailUserToHomeFragment(userInfo.user)
             )
         }
         mAddLogoutFab.setOnClickListener {
@@ -117,7 +117,7 @@ class DetailUserFragment : Fragment() {
                 DetailUserFragmentDirections.actionFragmentDetailUserToLoginFragment()
             )
         }
-        view.findViewById<TextView>(R.id.id_name_profil).text = userInfo.user.username
+        view.findViewById<TextView>(R.id.id_name_profil).text = userInfo.user.name
         view.findViewById<TextView>(R.id.id_number_profil).text = "E-MAIL: " + userInfo.user.email
         getGame(view)
     }
@@ -132,7 +132,7 @@ class DetailUserFragment : Fragment() {
     private val listener = GamesAdapter.OnClickListener { game ->
         // Add action to navigate
         findNavController().navigate(
-            DetailUserFragmentDirections.actionFragmentDetailUserToGameInfoFragment(game)
+            DetailUserFragmentDirections.actionFragmentDetailUserToGameInfoFragment(game,userInfo.user)
         )
     }
 }
