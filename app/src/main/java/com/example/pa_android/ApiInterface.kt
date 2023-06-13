@@ -1,4 +1,4 @@
-package com.example.projetfinaljeu
+package com.example.projetfinaljeuw
 
 import com.example.pa_android.AddFriendData
 import com.example.pa_android.LoginData
@@ -11,25 +11,30 @@ import retrofit2.http.*
 
 interface ApiInterface {
 
-    //liste  des jeux les plus joués
-    @POST("user/login")
+    @POST("auth/login")
     fun postLogin(@Body loginData: LoginData): Deferred<JsonObject>
 
-    @POST("user")
+    @POST("auth/signup")
     fun postSignup(@Body signupData: SignupData): Deferred<JsonObject>
 
-    @GET("user/name/{textsearch}")
-    fun getresearchByName(@Path("textsearch") textsearch: String?): Deferred<JsonObject>
+    @GET("user/{userId}/name/{textsearch}")
+    fun getresearchByName(@Path("userId") userId: String, @Path("textsearch") textsearch: String?): Deferred<JsonArray>
 
     @POST("friend/{iduser}")
     fun postaddFriend(@Body signupData: AddFriendData, @Path("iduser") iduser: String): Deferred<JsonObject>
 
     @PUT("friend/{iduser}/answer")
-    fun putUpdateFriend(@Body signupData: UpdateFriendData, @Path("iduser") iduser: String): Deferred<JsonObject>
+    fun AnswerInvitation(@Body signupData: UpdateFriendData, @Path("iduser") iduser: String): Deferred<JsonObject>
 
-    @GET("friend/sent/{textsearch}")
-    fun getfriendsSend(@Path("textsearch") textsearch: String?): Deferred<JsonArray>
+    @GET("friend/sent/{userId}")
+    fun getfriendsSend(@Path("userId") userId: String?): Deferred<JsonObject>
 
-    @GET("friend/received/{textsearch}")
-    fun getfriendsReceived(@Path("textsearch") textsearch: String?): Deferred<JsonArray>
+    @GET("friend/received/{userId}")
+    fun getfriendsReceived(@Path("userId") userId: String?): Deferred<JsonObject>
+
+    @GET("friend/{userId}")
+    fun getMyfriends(@Path("userId") userId: String?): Deferred<JsonObject>
+
+    @GET("game")
+    fun getGames(): Deferred<JsonObject>
 }

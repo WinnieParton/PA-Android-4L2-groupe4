@@ -15,37 +15,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.JsonParser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class DashboardFragment(user: User) : Fragment() {
     val userInfo = user
-    private var games: List<Game> = listOf(
-        Game(
-            1,
-            "https://gamesgamescdn.com/system/static/thumbs/slider_image/73499/original_EP-uphill-rush-12-462x250.jpg",
-            "Schouchin toxa",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ),
-        Game(
-            2,
-            "https://gamesgamescdn.com/system/static/thumbs/slider_image/70730/original_1499set000_easter-2023_462x250_en.jpg",
-            "uppliqh polm",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ),
-        Game(
-            3,
-            "https://www.gamereactor.fr/media/90/_3229073.jpg",
-            "Kopo Green",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ),
-        Game(
-            4,
-            "https://images.pexels.com/photos/6689072/pexels-photo-6689072.jpeg?",
-            "Algre Yuoi",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        )
-    )
     private lateinit var rv: RecyclerView
 
     // Make sure to use the FloatingActionButton for all the FABs
@@ -80,7 +60,6 @@ class DashboardFragment(user: User) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<TextView>(R.id.id_name_profil).text=userInfo.name
         view.findViewById<TextView>(R.id.id_number_profil).text="E-MAIL: "+userInfo.email
-        view.findViewById<TextView>(R.id.id_value_friend).text="0"
 
         mAddFab = view.findViewById(R.id.add_fab)
 
@@ -129,7 +108,6 @@ class DashboardFragment(user: User) : Fragment() {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToResearchUserFragment(userInfo)
             )
-            //Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
         }
 
         mAddAlarmFab.setOnClickListener {
@@ -160,10 +138,35 @@ class DashboardFragment(user: User) : Fragment() {
                 HomeFragmentDirections.actionHomeFragmentToResearchUserFragment(userInfo)
             )
         }
-        getGame(view)
+        val dataSearch = mutableListOf<Game>()
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                val response = ApiClient.listGames()
+                val responseFriend = ApiClient.listMyFriend(userInfo.id)
+                val countFriend = responseFriend.get("requests").asJsonArray.size()
+                for (game in response.get("games").asJsonArray) {
+                    val it = game.asJsonObject
+                    dataSearch.add(
+                        Game(
+                            it.get("id").asInt, it.get("miniature").asString, it.get("name").asString,
+                            it.get("description").asString,it.get("minPlayers").asInt,it.get("maxPlayers").asInt
+                        )
+                    )
+                }
+                withContext(Dispatchers.Main) {
+                    view.findViewById<TextView>(R.id.id_value_friend).text= countFriend.toString()
+                    if (dataSearch.size == 0)
+                        view.findViewById<TextView>(R.id.no_game).visibility = View.VISIBLE
+                    else view.findViewById<TextView>(R.id.no_game).visibility = View.GONE
+                    getGame(dataSearch, view)
+                }
+            } catch (e: Exception) {
+                println("${e.message}")
+            }
+        }
     }
 
-    private fun getGame(view: View) {
+    private fun getGame(games: List<Game>, view: View) {
         rv = view.findViewById<RecyclerView>(R.id.list_game_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
         rv.adapter = GamesAdapter(games, listener, "all_game")

@@ -10,7 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class GameFragment : Fragment() {
@@ -26,21 +31,7 @@ class GameFragment : Fragment() {
     private val user: GameFragmentArgs by navArgs()
     // to check whether sub FAB buttons are visible or not.
     private var isAllFabsVisible: Boolean? = null
-    private var games: List<Game> = listOf(
 
-        Game(
-            3,
-            "https://www.gamereactor.fr/media/90/_3229073.jpg",
-            "Schouchin toxa",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ),
-        Game(
-            4,
-            "https://images.pexels.com/photos/6689072/pexels-photo-6689072.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "Algre Yuoi",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        )
-    )
     private lateinit var rv: RecyclerView
 
     override fun onCreateView(
@@ -109,10 +100,32 @@ class GameFragment : Fragment() {
             )
         }
 //
-        getGame(view)
+        val dataSearch = mutableListOf<Game>()
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                val response = ApiClient.listGames()
+                for (game in response.get("games").asJsonArray) {
+                    val it = game.asJsonObject
+                    dataSearch.add(
+                        Game(
+                            it.get("id").asInt, it.get("miniature").asString, it.get("name").asString,
+                            it.get("description").asString,it.get("minPlayers").asInt,it.get("maxPlayers").asInt
+                        )
+                    )
+                }
+                withContext(Dispatchers.Main) {
+                    if (dataSearch.size == 0)
+                        view.findViewById<TextView>(R.id.no_game).visibility = View.VISIBLE
+                    else view.findViewById<TextView>(R.id.no_game).visibility = View.GONE
+                    getGame(dataSearch, view)
+                }
+            } catch (e: Exception) {
+                println("${e.message}")
+            }
+        }
     }
 
-    private fun getGame(view: View) {
+    private fun getGame(games: List<Game>, view: View) {
         rv = view.findViewById<RecyclerView>(R.id.list_game_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
         rv.adapter = GamesAdapter(games, listener, "my_game")

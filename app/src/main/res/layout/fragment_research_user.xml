@@ -95,7 +95,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/block_setting"
             android:id="@+id/constraint_id_recy"
-            android:visibility="gone">
+            android:visibility="gone"
+            >
 
             <ScrollView
                 android:layout_width="match_parent"

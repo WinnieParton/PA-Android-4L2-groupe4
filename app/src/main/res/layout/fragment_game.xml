@@ -83,7 +83,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/scrolgame">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_game_recyclerview"
@@ -95,6 +96,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </ScrollView>
+        <TextView
+            android:id="@+id/no_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/no_game"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/secondary"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/scrolgame" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/float_button" />

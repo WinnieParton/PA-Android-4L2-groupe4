@@ -32,6 +32,7 @@
     <string name="item_name_game">King Grin</string>
     <string name="nb_result">Nombre de résultats : </string>
     <string name="no_user">Aucun utilisateur trouvé</string>
+    <string name="no_game">Aucun jeu disponible</string>
     <string name="my_friend">Mes amis</string>
     <string name="my_chat">Chat</string>
     <string name="title_list_game">Liste de jeux</string>

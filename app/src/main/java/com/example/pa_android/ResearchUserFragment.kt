@@ -15,13 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.JsonElement
 import kotlinx.coroutines.*
 
 class ResearchUserFragment : Fragment() {
     private lateinit var rv: RecyclerView
     private val user: ResearchUserFragmentArgs by navArgs()
 
-    // Make sure to use the FloatingActionButton for all the FABs
     private lateinit var mAddFab: FloatingActionButton
     private lateinit var mAddAlarmFab: FloatingActionButton
     private lateinit var addAlarmActionText: TextView
@@ -106,11 +106,9 @@ class ResearchUserFragment : Fragment() {
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
             }
-
             override fun afterTextChanged(s: Editable?) {
             }
         })
@@ -121,24 +119,42 @@ class ResearchUserFragment : Fragment() {
             progressBar.visibility = View.VISIBLE
             constraint.visibility = View.GONE
             view.findViewById<ConstraintLayout>(R.id.constraint_id_recy).visibility=View.GONE
-
+            dataSearch.clear()
             GlobalScope.launch(Dispatchers.Default) {
                 try {
-                    val response = ApiClient.researchByName(searchEditText.text.trim().toString())
+                    val response = ApiClient.researchByName(user.user.id, searchEditText.text.trim().toString())
+
+
+                    for (usr in response) {
+                        val it = usr.asJsonObject
+                        val friendsArray = it.get("friends").asJsonArray
+
+                        var containsId = false
+
+                        for (friend in friendsArray) {
+                            if (friend.isJsonObject) {
+                                val friendObject = friend.asJsonObject
+                                if (friendObject.get("id").asInt == 15) {
+                                    containsId = true
+                                    break
+                                }
+                            }
+                        }
+
+                        dataSearch.add(
+                            User(
+                                it.get("id").asString,
+                                it.get("name").asString,
+                                it.get("email").asString,
+                                it.get("role").asString,
+                                if(containsId) "ACCEPTED" else ""
+                            )
+                        )
+                    }
                     withContext(Dispatchers.Main) {
                         progressBar.visibility = View.GONE
                         constraint.visibility = View.VISIBLE
                         view.findViewById<ConstraintLayout>(R.id.constraint_id_recy).visibility=View.VISIBLE
-                        dataSearch.clear()
-                        dataSearch.add(
-                            User(
-                                response.get("id").asString,
-                                response.get("name").asString,
-                                response.get("email").asString,
-                                response.get("role").asString,
-                                ""
-                            )
-                        )
                         getUser(dataSearch, view)
                     }
                 } catch (e: Exception) {
@@ -168,7 +184,7 @@ class ResearchUserFragment : Fragment() {
     private val listener = UsersAdapter.OnClickListener { us, status ->
         GlobalScope.launch(Dispatchers.Default) {
             try {
-                ApiClient.addFriend(AddFriendData(us.id), user.user.id)
+                ApiClient.addFriend(AddFriendData(user.user.id), us.id)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(requireContext(), "Person Added", Toast.LENGTH_SHORT).show()
                 }

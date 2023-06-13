@@ -5,5 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class AddFriendData(
-    val receiver: String
+    val sender: String
 ) : Parcelable

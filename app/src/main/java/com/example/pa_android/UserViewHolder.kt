@@ -23,6 +23,7 @@ class UserViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         user_name.text = user.name
         user_email.text = user.email
         if(type != "search") {
+
             if (user.status == "PENDING") {
                 val redColor = ContextCompat.getColor(itemView.context, R.color.bg_green)
                 val colorStateList = ColorStateList.valueOf(redColor)
@@ -39,6 +40,9 @@ class UserViewHolder(v: View) : RecyclerView.ViewHolder(v) {
                 card_btn_no.visibility = View.GONE
                 card_btn.visibility = View.GONE
             }
+        }else{
+            if (user.status == "ACCEPTED")
+                img_card_btn.visibility = View.GONE
         }
     }
 }

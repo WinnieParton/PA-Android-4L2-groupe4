@@ -4,6 +4,7 @@ import com.example.pa_android.AddFriendData
 import com.example.pa_android.LoginData
 import com.example.pa_android.SignupData
 import com.example.pa_android.UpdateFriendData
+import com.example.projetfinaljeuw.ApiInterface
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
 
     private val api = Retrofit.Builder()
-        .baseUrl("http:/192.168.100.48:8080/")
+        .baseUrl("http:/192.168.1.99:8080/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
@@ -27,8 +28,8 @@ object ApiClient {
         return api.postSignup(data).await()
     }
 
-    suspend fun researchByName(textsearch: String): JsonObject {
-        return api.getresearchByName(textsearch).await()
+    suspend fun researchByName(userId: String, textsearch: String): JsonArray {
+        return api.getresearchByName(userId, textsearch).await()
     }
 
     suspend fun addFriend(data: AddFriendData, iduser: String): JsonObject {
@@ -36,14 +37,22 @@ object ApiClient {
     }
 
     suspend fun answerFriend(data: UpdateFriendData, iduser: String): JsonObject {
-        return api.putUpdateFriend(data, iduser).await()
+        return api.AnswerInvitation(data, iduser).await()
     }
 
-    suspend fun listFriendSend(textsearch: String): JsonArray {
+    suspend fun listFriendSend(textsearch: String): JsonObject {
         return api.getfriendsSend(textsearch).await()
     }
 
-    suspend fun listFriendReceived(textsearch: String): JsonArray {
+    suspend fun listFriendReceived(textsearch: String): JsonObject {
         return api.getfriendsReceived(textsearch).await()
+    }
+
+    suspend fun listMyFriend(textsearch: String): JsonObject {
+        return api.getMyfriends(textsearch).await()
+    }
+
+    suspend fun listGames(): JsonObject {
+        return api.getGames().await()
     }
 }
