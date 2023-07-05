@@ -143,7 +143,6 @@ class DashboardFragment(user: User) : Fragment() {
             try {
                 val response = ApiClient.listGames()
                 val responseFriend = ApiClient.listMyFriend(userInfo.id.toString())
-                println("ddddddddddd55555  "+responseFriend)
                 val countFriend = responseFriend.get("requests").asJsonArray.size()
                 for (game in response.get("games").asJsonArray) {
                     val it = game.asJsonObject

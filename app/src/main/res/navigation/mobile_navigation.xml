@@ -196,5 +196,9 @@
         android:id="@+id/chatFragment"
         android:name="com.example.pa_android.ChatFragment"
         android:label="Chat"
-        tools:layout="@layout/fragment_chat"></fragment>
+        tools:layout="@layout/fragment_chat">
+        <argument
+            android:name="chatInfo"
+            app:argType="com.example.pa_android.Chat" />
+    </fragment>
 </navigation>

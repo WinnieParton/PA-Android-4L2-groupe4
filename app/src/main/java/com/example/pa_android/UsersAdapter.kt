@@ -31,6 +31,13 @@ class UsersAdapter(
             holder.itemView.findViewById<CardView>(R.id.card_btn).setOnClickListener {
                 onClickListener.onClick(users[position], "PENDING")
             }
+        }else if(type == "message"){
+            holder.itemView.findViewById<CardView>(R.id.card_btn_no).visibility = View.GONE
+            holder.itemView.findViewById<CardView>(R.id.card_btn).visibility = View.GONE
+
+            holder.itemView.findViewById<RelativeLayout>(R.id.relative_user).setOnClickListener {
+                onClickListener.onClick(users[position], "")
+            }
         }
         else {
             if(users[position].status == "ACCEPTED")

@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private val api = Retrofit.Builder()
-        .baseUrl("http:/192.168.1.99:8080/")
+        .baseUrl("http:/192.168.1.4:8080/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(createOkHttpClient())
@@ -74,5 +74,9 @@ object ApiClient {
 
     suspend fun listGames(): JsonObject {
         return api.getGames().await()
+    }
+
+    suspend fun listConversation(userId: String): JsonArray {
+        return api.getListConversation(userId).await()
     }
 }

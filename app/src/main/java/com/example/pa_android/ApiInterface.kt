@@ -37,4 +37,8 @@ interface ApiInterface {
 
     @GET("game")
     fun getGames(): Deferred<JsonObject>
+
+    @GET("user/chat/list/{userId}")
+    fun getListConversation(@Path("userId") userId: String): Deferred<JsonArray>
+
 }

@@ -17,31 +17,8 @@ import kotlin.text.Typography.less
 
 class ChatFragment : Fragment() {
     private lateinit var rv: RecyclerView
-    private var chats: List<Chat> = listOf(
-        Chat(
-            1,
-            "https://gamesgamescdn.com/system/static/thumbs/slider_image/70730/original_1499set000_easter-2023_462x250_en.jpg?1681111279",
-            "Winnie Parton",
-"Hello Winnie How Are You ?",
-            true),
-        Chat(
-            2,
-            "https://images.pexels.com/photos/6689072/pexels-photo-6689072.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "Ali Arthur",
-"I'm not okay. I have not finish my task about PA and another Projet. I need help",
-            true),
-        Chat(
-            3,
-            "https://www.gamereactor.fr/media/90/_3229073.jpg",
-            "Mohamed Ali",
-            "I'm Fine. What can i do to help you?",false),
-        Chat(
-            4,
-            "https://gamesgamescdn.com/system/static/thumbs/slider_image/73499/original_EP-uphill-rush-12-462x250.jpg?1676468575",
-            "Paul Dupond",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            ,true)
-    )
+    private var chats: List<Chat> = listOf( )
+
     val chatList = mutableListOf<Chat>()
     val webSocketClient = WebSocketClient(ChatWebSocketListener())
 
@@ -64,14 +41,14 @@ class ChatFragment : Fragment() {
             val message = view.findViewById<EditText>(R.id.message_text).text.toString()
             webSocketClient.sendMessage(message)
             view.findViewById<EditText>(R.id.message_text).text.clear()
-            chatList.add(
+            /*chatList.add(
                 Chat(
                     chats.size + 1,
                     "https://gamesgamescdn.com/system/static/thumbs/slider_image/70730/original_1499set000_easter-2023_462x250_en.jpg?1681111279",
                     "Winnie Parton",
                     view.findViewById<EditText>(R.id.message_text).text.toString(),
                     true)
-            )
+            )*/
             chats = chatList
             getChat(view)
             view.findViewById<EditText>(R.id.message_text).text.clear()

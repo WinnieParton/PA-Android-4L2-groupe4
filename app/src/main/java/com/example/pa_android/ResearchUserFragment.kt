@@ -124,7 +124,6 @@ class ResearchUserFragment : Fragment() {
                 try {
                     val response = ApiClient.researchByName(user.user.id, searchEditText.text.trim().toString())
 
-
                     for (usr in response) {
                         val it = usr.asJsonObject
                         val friendsArray = it.get("friends").asJsonArray

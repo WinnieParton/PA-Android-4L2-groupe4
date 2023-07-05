@@ -20,13 +20,13 @@ class ChatViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         if(type == "listchat") {
             if (chat.name != null)
                 title_game.makeBoldText(chat.name)
-            name_editeurText.text = chat.detailed_description
+            name_editeurText.text = chat.message
         }else{
             if(chat.send){
-                text_send.text = chat.detailed_description
+                text_send.text = chat.message
                 text_receive.visibility = View.GONE
             }else{
-                text_receive.text = chat.detailed_description
+                text_receive.text = chat.message
                 text_send.visibility = View.GONE
             }
         }

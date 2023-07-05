@@ -55,7 +55,6 @@
             android:textSize="14sp"
             tools:ignore="Autofill" />
 
-
         <ImageView
             android:id="@+id/iconsearchbutton"
             android:layout_width="wrap_content"
@@ -80,7 +79,7 @@
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeSearchBarSearch">
-
+        <include layout="@layout/loader" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">

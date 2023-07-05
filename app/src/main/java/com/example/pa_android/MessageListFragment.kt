@@ -1,46 +1,29 @@
 package com.example.pa_android
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.time.LocalDate
 
 
 class MessageListFragment(user: User) : Fragment() {
-    val userInfo =user
-    private var chats: List<Chat> = listOf(
-        Chat(
-            1,
-            "https://gamesgamescdn.com/system/static/thumbs/slider_image/70730/original_1499set000_easter-2023_462x250_en.jpg?1681111279",
-            "Winnie Parton",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ,true),
-        Chat(
-            2,
-            "https://images.pexels.com/photos/6689072/pexels-photo-6689072.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "Ali Arthur",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ,true),
-        Chat(
-            3,
-            "https://www.gamereactor.fr/media/90/_3229073.jpg",
-            "Mohamed Ali",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ,false),
-        Chat(
-            4,
-            "https://gamesgamescdn.com/system/static/thumbs/slider_image/73499/original_EP-uphill-rush-12-462x250.jpg?1676468575",
-            "Paul Dupond",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ,true)
-    )
+    val userInfo = user
     private lateinit var rv: RecyclerView
 
     // Make sure to use the FloatingActionButton for all the FABs
@@ -122,25 +105,118 @@ class MessageListFragment(user: User) : Fragment() {
                 HomeFragmentDirections.actionHomeFragmentToLoginFragment()
             )
         }
-//
-        getChat(view)
+        val dataSearch = mutableListOf<Chat>()
+        val dataSearchUser = mutableListOf<User>()
+        val clickbutton = view.findViewById<ImageView>(R.id.iconsearchbutton)
+        val searchEditText = view.findViewById<EditText>(R.id.text_research_input)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar_home)
+        progressBar.visibility = View.GONE
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+            }
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+
+        clickbutton.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            dataSearchUser.clear()
+            GlobalScope.launch(Dispatchers.Default) {
+                try {
+                    val response = ApiClient.researchByName(userInfo.id, searchEditText.text.trim().toString())
+
+                    for (usr in response) {
+                        val it = usr.asJsonObject
+                        val friendsArray = it.get("friends").asJsonArray
+                        var containsId = false
+                        for (friend in friendsArray) {
+                            if (friend.isJsonObject) {
+                                val friendObject = friend.asJsonObject
+                                if (friendObject.get("id").asInt == 15) {
+                                    containsId = true
+                                    break
+                                }
+                            }
+                        }
+                        dataSearchUser.add(
+                            User(
+                                it.get("id").asString,
+                                it.get("name").asString,
+                                it.get("email").asString,
+                                it.get("role").asString,
+                                if(containsId) "ACCEPTED" else ""
+                            )
+                        )
+                    }
+                    withContext(Dispatchers.Main) {
+                        progressBar.visibility = View.GONE
+                        getUser(dataSearchUser, view)
+                    }
+                } catch (e: Exception) {
+                    activity?.runOnUiThread {
+                        progressBar.visibility = View.GONE
+                        Toast.makeText(
+                            requireContext(),
+                            "Not found "+searchEditText.text.toString()+". Please write all name",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    println("Error connecting to server: ${e.message}")
+                }
+            }
+
+        }
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                progressBar.visibility = View.VISIBLE
+                val response = ApiClient.listConversation(userInfo.id)
+                for (game in response) {
+                    val it = game.asJsonObject
+                    dataSearch.add(
+                        Chat(
+                            it.get("senderUser").asInt, it.get("receiverUser").asInt, it.get("message").asString,
+                            it.get("senderName").asString,it.get("receiverName").asString,it.get("name").asString,
+                            it.get("status").asString,it.get("currentDate").asString,true
+                        )
+                    )
+                }
+                withContext(Dispatchers.Main) {
+                    progressBar.visibility = View.GONE
+                    getChat(view, dataSearch)
+                }
+            } catch (e: Exception) {
+            }
+        }
     }
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
-    private fun getChat(view: View) {
-        rv = view.findViewById<RecyclerView>(R.id.list_chat_recyclerview)
+    private fun getChat(view: View, chats: List<Chat>) {
+        rv = view.findViewById(R.id.list_chat_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
         rv.adapter = ChatsAdapter(chats, listener, "listchat")
-
     }
-
+    private fun getUser(users: List<User>,view: View) {
+        rv = view.findViewById(R.id.list_chat_recyclerview)
+        rv.layoutManager = LinearLayoutManager(context)
+        rv.adapter = UsersAdapter(users, listenerUser, "message")
+    }
     private val listener = ChatsAdapter.OnClickListener { chat ->
+
         // Add action to navigate
         findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToChatFragment()
+            HomeFragmentDirections.actionHomeFragmentToChatFragment(chat)
         )
+    }
 
+    private val listenerUser = UsersAdapter.OnClickListener { us, status ->
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToChatFragment(Chat(userInfo.id.toInt(), us.id.toInt(),
+                "", userInfo.name, us.name, us.name, "UNREAD", "", true))
+        )
     }
 }
