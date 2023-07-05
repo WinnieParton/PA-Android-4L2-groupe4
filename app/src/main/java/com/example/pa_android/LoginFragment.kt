@@ -1,6 +1,8 @@
 package com.example.pa_android
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -21,11 +23,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import java.util.*
+import com.auth0.jwt.JWT
+import com.auth0.jwt.interfaces.DecodedJWT
 
 class LoginFragment : Fragment() {
     private var loginData: LoginData=LoginData(null,null)
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +43,11 @@ class LoginFragment : Fragment() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Initialize SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences("YourPreferencesName", Context.MODE_PRIVATE)
+    }
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -112,8 +120,6 @@ class LoginFragment : Fragment() {
             }
         }
 
-
-
         emailEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -145,7 +151,6 @@ class LoginFragment : Fragment() {
                 emailEditText.error = null
             }
         }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -155,50 +160,47 @@ class LoginFragment : Fragment() {
         progress_bar_home.visibility=View.VISIBLE
         GlobalScope.launch(Dispatchers.Default) {
             try {
+                ApiClient.setSharedPreferences(sharedPreferences)
                 val response = ApiClient.login(LoginData(email, password))
                 withContext(Dispatchers.Main) {
 
                     if (response.get("token").asString != null) {
                         // Sign in success, update UI with the signed-in user's information
-                        val user =String(Base64.getDecoder().decode(response.get("token").asString))
+                        val user: DecodedJWT = JWT.decode(response.get("token").asString)
 
-                        if (user != "") {
-                            val jsonObject = JSONObject(user) // parse the string as a JSON object
+                        val id: String? = user.getClaim("id").asInt().toString()
+                        val name: String? = user.getClaim("name").asString()
+                        val role: String? = user.getClaim("role").asString()
+                        val email: String? = user.getClaim("sub").asString()
+                        if(id !=null && name !=null&& email !=null&& role !=null){
+                            saveTokenToLocalStorage(response.get("token").asString)
                             Toast.makeText(requireContext(), "Successfull authentication", Toast.LENGTH_SHORT).show()
-
                             findNavController().navigate(
                                 LoginFragmentDirections.actionLoginFragmentToHomeFragment(
-                                    User(
-                                        jsonObject.getString("id"),
-                                        jsonObject.getString("name"),
-                                        jsonObject.getString("email"),
-                                        jsonObject.getString("role"),
-                                        ""
-                                    )
+                                    User(id, name, email, role, "" )
                                 )
                             )
-                        }else{
-                            passwordEditText.isEnabled=true
-                            Toast.makeText(requireContext(), getString(R.string.message_login), Toast.LENGTH_SHORT).show()
                         }
+
                     } else {
                         Toast.makeText(requireContext(), getString(R.string.message_login), Toast.LENGTH_SHORT).show()
                         passwordEditText.isEnabled=true
-
                     }
-
                 }
             } catch (e: Exception) {
-                println("Error connecting to server: ${e.message}")
                 activity?.runOnUiThread {
                     Toast.makeText(requireContext(), "Error connecting to server", Toast.LENGTH_SHORT).show()
                     passwordEditText.isEnabled=true
                     progress_bar_home.visibility = View.GONE
                 }
-
-
             }
         }
+    }
 
+    // Function to store the token in SharedPreferences
+    private fun saveTokenToLocalStorage(token: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("token", token)
+        editor.apply()
     }
 }

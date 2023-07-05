@@ -68,4 +68,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     //material
     implementation 'com.google.android.material:material:1.4.0'
+    //jwt
+    implementation 'com.auth0:java-jwt:3.18.2'
 }

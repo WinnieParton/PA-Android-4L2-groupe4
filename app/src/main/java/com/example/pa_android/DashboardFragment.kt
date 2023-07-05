@@ -142,7 +142,8 @@ class DashboardFragment(user: User) : Fragment() {
         GlobalScope.launch(Dispatchers.Default) {
             try {
                 val response = ApiClient.listGames()
-                val responseFriend = ApiClient.listMyFriend(userInfo.id)
+                val responseFriend = ApiClient.listMyFriend(userInfo.id.toString())
+                println("ddddddddddd55555  "+responseFriend)
                 val countFriend = responseFriend.get("requests").asJsonArray.size()
                 for (game in response.get("games").asJsonArray) {
                     val it = game.asJsonObject
@@ -161,6 +162,7 @@ class DashboardFragment(user: User) : Fragment() {
                     getGame(dataSearch, view)
                 }
             } catch (e: Exception) {
+                println("ddddddddddd  "+userInfo.id)
                 println("${e.message}")
             }
         }

@@ -1,25 +1,45 @@
 package com.example.projetfinaljeu
 
-import com.example.pa_android.AddFriendData
-import com.example.pa_android.LoginData
-import com.example.pa_android.SignupData
-import com.example.pa_android.UpdateFriendData
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
+import com.example.pa_android.*
 import com.example.projetfinaljeuw.ApiInterface
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-
     private val api = Retrofit.Builder()
         .baseUrl("http:/192.168.1.99:8080/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .client(createOkHttpClient())
         .build()
         .create(ApiInterface::class.java)
+    private lateinit var sharedPreferences: SharedPreferences
 
+    fun setSharedPreferences(pref: SharedPreferences) {
+        sharedPreferences = pref
+    }
+    private fun createOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val token = getTokenFromLocalStorage()
+                val request = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer $token")
+                    .build()
+                chain.proceed(request)
+            }
+            .build()
+    }
+
+    private fun getTokenFromLocalStorage(): String? {
+        return sharedPreferences.getString("token", null)
+    }
    suspend fun login(data: LoginData): JsonObject {
         return api.postLogin(data).await()
    }

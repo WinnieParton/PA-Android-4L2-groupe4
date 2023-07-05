@@ -104,6 +104,7 @@ class GameFragment : Fragment() {
         GlobalScope.launch(Dispatchers.Default) {
             try {
                 val response = ApiClient.listGames()
+                println("responsedddddddddddd "+response)
                 for (game in response.get("games").asJsonArray) {
                     val it = game.asJsonObject
                     dataSearch.add(

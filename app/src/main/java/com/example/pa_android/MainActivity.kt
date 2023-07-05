@@ -1,5 +1,6 @@
 package com.example.pa_android
 
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -85,4 +87,15 @@ fun TextView.applyUnderlineTextPart(text: String) {
     val spannable = SpannableString(text)
     spannable.setSpan(UnderlineSpan(), 0, text.indexOf(':'), 0)
     setText(spannable)
+}
+
+fun main() {
+    val webSocketUrl = "ws://localhost:8080/private-chat-message" // Replace with your WebSocket server URL
+    val webSocketClient = WebSocketClient(ChatWebSocketListener())
+    webSocketClient.connect(webSocketUrl)
+
+    // Send messages using webSocketClient.sendMessage("your message")
+
+    // Disconnect when done
+    // webSocketClient.disconnect()
 }

@@ -43,6 +43,8 @@ class ChatFragment : Fragment() {
             ,true)
     )
     val chatList = mutableListOf<Chat>()
+    val webSocketClient = WebSocketClient(ChatWebSocketListener())
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,12 +55,15 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Connect to the WebSocket server
+        webSocketClient.connect("ws://localhost:8080/private-chat-message")
         getChat(view)
-
         chatList.addAll(chats)
 
         view.findViewById<Button>(R.id.send_button).setOnClickListener {
-
+            val message = view.findViewById<EditText>(R.id.message_text).text.toString()
+            webSocketClient.sendMessage(message)
+            view.findViewById<EditText>(R.id.message_text).text.clear()
             chatList.add(
                 Chat(
                     chats.size + 1,
@@ -71,6 +76,10 @@ class ChatFragment : Fragment() {
             getChat(view)
             view.findViewById<EditText>(R.id.message_text).text.clear()
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        webSocketClient.disconnect()
     }
     override fun onResume() {
         super.onResume()
