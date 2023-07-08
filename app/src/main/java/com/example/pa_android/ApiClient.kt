@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private val api = Retrofit.Builder()
-        .baseUrl("http:/192.168.1.4:8080/")
+        .baseUrl("http:/192.168.1.99:8080/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(createOkHttpClient())
@@ -37,7 +37,7 @@ object ApiClient {
             .build()
     }
 
-    private fun getTokenFromLocalStorage(): String? {
+    public fun getTokenFromLocalStorage(): String? {
         return sharedPreferences.getString("token", null)
     }
    suspend fun login(data: LoginData): JsonObject {

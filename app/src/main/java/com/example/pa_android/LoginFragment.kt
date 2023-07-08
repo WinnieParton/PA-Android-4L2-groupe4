@@ -163,7 +163,6 @@ class LoginFragment : Fragment() {
                 ApiClient.setSharedPreferences(sharedPreferences)
                 val response = ApiClient.login(LoginData(email, password))
                 withContext(Dispatchers.Main) {
-
                     if (response.get("token").asString != null) {
                         // Sign in success, update UI with the signed-in user's information
                         val user: DecodedJWT = JWT.decode(response.get("token").asString)
@@ -183,14 +182,23 @@ class LoginFragment : Fragment() {
                         }
 
                     } else {
-                        Toast.makeText(requireContext(), getString(R.string.message_login), Toast.LENGTH_SHORT).show()
+                        println(getString(R.string.message_login))
                         passwordEditText.isEnabled=true
+                        Toast.makeText(requireContext(), getString(R.string.message_login), Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
                 activity?.runOnUiThread {
-                    Toast.makeText(requireContext(), "Error connecting to server", Toast.LENGTH_SHORT).show()
-                    passwordEditText.isEnabled=true
+                    if(e.message?.contains("HTTP 403") == true){
+                        Toast.makeText(requireContext(), getString(R.string.message_login), Toast.LENGTH_SHORT).show()
+                    }else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Error connecting to server",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    }
+                    passwordEditText.isEnabled = true
                     progress_bar_home.visibility = View.GONE
                 }
             }

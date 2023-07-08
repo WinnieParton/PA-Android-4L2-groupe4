@@ -200,5 +200,8 @@
         <argument
             android:name="chatInfo"
             app:argType="com.example.pa_android.Chat" />
+        <argument
+            android:name="user"
+            app:argType="com.example.pa_android.User" />
     </fragment>
 </navigation>

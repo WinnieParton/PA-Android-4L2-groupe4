@@ -90,16 +90,6 @@ fun TextView.applyUnderlineTextPart(text: String) {
     setText(spannable)
 }
 
-fun main() {
-    val webSocketUrl = "ws://localhost:8080/private-chat-message" // Replace with your WebSocket server URL
-    val webSocketClient = WebSocketClient(ChatWebSocketListener())
-    webSocketClient.connect(webSocketUrl)
-
-    // Send messages using webSocketClient.sendMessage("your message")
-
-    // Disconnect when done
-    // webSocketClient.disconnect()
-}
 fun getCurrentLocalDate(): Date {
     val calendar = Calendar.getInstance()
     calendar.time = Date()
