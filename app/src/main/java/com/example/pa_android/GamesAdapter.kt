@@ -23,10 +23,7 @@ class GamesAdapter(
     }
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
-        holder.updateView(games[position])
-
-        if (type == "all_game")
-            holder.itemView.findViewById<TextView>(R.id.ranking_by_game).visibility = View.GONE
+        holder.updateView(games[position], type)
 
         holder.itemView.findViewById<CardView>(R.id.item_product_el).setOnClickListener {
             onClickListener.onClick(games[position])

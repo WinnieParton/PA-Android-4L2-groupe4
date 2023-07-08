@@ -193,7 +193,7 @@ class ResearchUserFragment : Fragment() {
                 activity?.runOnUiThread {
                     Toast.makeText(
                         requireContext(),
-                        "Error server ${e.message}", Toast.LENGTH_SHORT
+                        "User already added", Toast.LENGTH_SHORT
                     ).show()
                 }
                 println("Error connecting to server: ${e.message}")

@@ -179,15 +179,15 @@
         <argument
             android:name="user"
             app:argType="com.example.pa_android.User" />
+        <action
+            android:id="@+id/action_game_info_fragment_to_fragment_detail_user"
+            app:destination="@id/fragment_detail_user" />
     </fragment>
     <fragment
         android:id="@+id/gameInfoClassementFragment"
         android:name="com.example.pa_android.GameInfoClassementFragment"
         android:label="GameInfoClassementFragment"
         tools:layout="@layout/fragment_game_info_classement">
-        <action
-            android:id="@+id/action_gameInfoClassementFragment_to_fragment_detail_user"
-            app:destination="@id/fragment_detail_user" />
         <action
             android:id="@+id/action_gameInfoClassementFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

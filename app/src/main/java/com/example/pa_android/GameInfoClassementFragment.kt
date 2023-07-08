@@ -8,43 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetfinaljeu.ApiClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class GameInfoClassementFragment : Fragment() {
-    private var ranking: List<Ranking> = listOf(
-        Ranking(
-            1,
-            User(
-                "122",
-                "Winnie Ali",
-                "koum@gmail.com",
-                "winnie123456789",
-                ""
-            ),
-            700
-        ),
-        Ranking(
-            2,
-            User(
-                "1222",
-                "koum@gmail.com",
-                "Mohamed Youss",
-                "winnie123456789",
-                ""
-            ),
-            900
-        ),
-        Ranking(
-            3,
-            User(
-                "1922",
-                "koum@gmail.com",
-                "Anatol Bagh",
-                "winnie123456789",
-                ""
-            ),
-            750
-        ),
-    )
+class GameInfoClassementFragment(id: Int) : Fragment() {
+    val gameId: Int = id
+    private var ranking = mutableListOf<Ranking>()
     private lateinit var rv: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +28,32 @@ class GameInfoClassementFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getRanking(view)
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                val response = ApiClient.listClassementGame(gameId)
+                for (jsonElement in response.get("globalRanking").asJsonArray) {
+                    val it = jsonElement.asJsonObject
+                    ranking.add(
+                        Ranking(
+                            it.get("id").asInt,
+                            User(
+                                it.get("user").asJsonObject.get("id").asString,
+                                it.get("user").asJsonObject.get("name").asString,
+                                it.get("user").asJsonObject.get("email").asString,
+                                it.get("user").asJsonObject.get("role").asString,
+                                ""
+                            ),
+                            it.get("score").asInt
+                        )
+                    )
+                }
+                withContext(Dispatchers.Main) {
+                    getRanking(view)
+                }
+            } catch (e: Exception) {
+                println("Error connecting to server: ${e.message}")
+            }
+        }
     }
 
     private fun getRanking(view: View) {
@@ -64,13 +61,12 @@ class GameInfoClassementFragment : Fragment() {
         rv = view.findViewById<RecyclerView>(R.id.list_classement_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
         rv.adapter = RankingsAdapter(sortedRanking, listener)
-
     }
 
     private val listener = RankingsAdapter.OnClickListener { ranking ->
         // Add action to navigate
         findNavController().navigate(
-            GameInfoClassementFragmentDirections.actionGameInfoClassementFragmentToFragmentDetailUser(
+            GameInfoFragmentDirections.actionGameInfoFragmentToFragmentDetailUser(
                 ranking.user!!
             )
         )

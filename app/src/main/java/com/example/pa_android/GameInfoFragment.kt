@@ -1,5 +1,7 @@
 package com.example.pa_android
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +17,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class GameInfoFragment : Fragment() {
     // Make sure to use the FloatingActionButton for all the FABs
@@ -57,7 +64,18 @@ class GameInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        view.findViewById<TextView>(R.id.ranking_by_game).visibility = View.GONE
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                val response = ApiClient.infoClassementGameUser(game.user.id, game.game.appid)
+                withContext(Dispatchers.Main) {
+                    view.findViewById<TextView>(R.id.ranking_by_game).visibility = View.VISIBLE
+                    view.findViewById<TextView>(R.id.ranking_by_game).text = "${response.get("user").asJsonObject.get("name").asString} score: ${response.get("score").asInt}"
+                }
+            } catch (e: Exception) {
+                println("Error connecting to server: ${e.message}")
+            }
+        }
         view.findViewById<TextView>(R.id.title_game).text = game.game.name
         if (game.game.header_image?.isNotEmpty() == true || game.game.header_image != null)
             Glide.with(view)
@@ -137,7 +155,7 @@ class GameInfoFragment : Fragment() {
             // Return the appropriate fragment based on the tab position
             return when (position) {
                 0 -> GameInfoDescriptionFragment(game.game.detailed_description!!)
-                1 -> GameInfoClassementFragment()
+                1 -> GameInfoClassementFragment(game.game.appid)
                 else -> throw IllegalArgumentException("Invalid tab position: $position")
             }
         }

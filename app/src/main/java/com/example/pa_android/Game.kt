@@ -11,4 +11,6 @@ data class Game(
     val detailed_description: String,
     val minPlayers: Int,
     val maxPlayers: Int,
+    val score: Int?,
+    val appidRanking: Int?,
 ) : Parcelable

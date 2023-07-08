@@ -1,6 +1,8 @@
 package com.example.pa_android
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class DetailUserFragment : Fragment() {
@@ -27,20 +34,7 @@ class DetailUserFragment : Fragment() {
     private lateinit var addPersonActionText: TextView
     private var isAllFabsVisible: Boolean? = null
     private val userInfo: DetailUserFragmentArgs by navArgs()
-    private var games: List<Game> = listOf(
-        Game(
-            3,
-            "https://www.gamereactor.fr/media/90/_3229073.jpg",
-            "Three fighter",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ,2,3),
-        Game(
-            4,
-            "https://images.pexels.com/photos/6689072/pexels-photo-6689072.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "Sangoku Vegan",
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        ,4,5)
-    )
+    private var games = mutableListOf<Game>()
     private lateinit var rv: RecyclerView
 
     override fun onCreateView(
@@ -54,7 +48,6 @@ class DetailUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAddFab = view.findViewById(R.id.add_fab)
-
         // FAB button
         mAddPersonFab = view.findViewById(R.id.add_person_fab)
         addAlarmActionText = view.findViewById(R.id.add_alarm_action_text)
@@ -117,15 +110,53 @@ class DetailUserFragment : Fragment() {
                 DetailUserFragmentDirections.actionFragmentDetailUserToLoginFragment()
             )
         }
+        view.findViewById<TextView>(R.id.text_research_input).addTextChangedListener(object :
+            TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+            }
+            override fun afterTextChanged(s: Editable?) {
+                val filteredGames = games.filter { it.name.contains(s.toString(), ignoreCase = true) }
+                getGame(view, filteredGames)
+            }
+        })
+
         view.findViewById<TextView>(R.id.id_name_profil).text = userInfo.user.name
         view.findViewById<TextView>(R.id.id_number_profil).text = "E-MAIL: " + userInfo.user.email
-        getGame(view)
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                val response = ApiClient.listClassementGameUser(userInfo.user.id)
+
+                for (jsonElement in response.get("rankings").asJsonArray) {
+                    val it = jsonElement.asJsonObject
+                    games.add(
+                        Game(
+                            it.get("game").asJsonObject.get("id").asInt,
+                            it.get("game").asJsonObject.get("miniature").asString,
+                            it.get("game").asJsonObject.get("name").asString,
+                            it.get("game").asJsonObject.get("description").asString,
+                            it.get("game").asJsonObject.get("minPlayers").asInt,
+                            it.get("game").asJsonObject.get("maxPlayers").asInt,
+                            it.get("score").asInt,
+                            it.get("id").asInt
+                        )
+                    )
+                }
+                withContext(Dispatchers.Main) {
+                    getGame(view, games)
+                }
+            } catch (e: Exception) {
+                println("Error connecting to server: ${e.message}")
+            }
+        }
     }
 
-    private fun getGame(view: View) {
+    private fun getGame(view: View, gams:List<Game>) {
         rv = view.findViewById<RecyclerView>(R.id.list_game_recyclerview)
         rv.layoutManager = LinearLayoutManager(context)
-        rv.adapter = GamesAdapter(games, listener, "my_game")
+        rv.adapter = GamesAdapter(gams, listener, "my_game")
 
     }
 

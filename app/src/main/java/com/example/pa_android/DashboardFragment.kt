@@ -143,18 +143,21 @@ class DashboardFragment(user: User) : Fragment() {
             try {
                 val response = ApiClient.listGames()
                 val responseFriend = ApiClient.listMyFriend(userInfo.id.toString())
+                val responseMessage = ApiClient.listConversation(userInfo.id)
                 val countFriend = responseFriend.get("requests").asJsonArray.size()
+                val countMessage = responseMessage.size()
                 for (game in response.get("games").asJsonArray) {
                     val it = game.asJsonObject
                     dataSearch.add(
                         Game(
                             it.get("id").asInt, it.get("miniature").asString, it.get("name").asString,
-                            it.get("description").asString,it.get("minPlayers").asInt,it.get("maxPlayers").asInt
+                            it.get("description").asString,it.get("minPlayers").asInt,it.get("maxPlayers").asInt,0,0
                         )
                     )
                 }
                 withContext(Dispatchers.Main) {
                     view.findViewById<TextView>(R.id.id_value_friend).text= countFriend.toString()
+                    view.findViewById<TextView>(R.id.id_value_message).text= countMessage.toString()
                     if (dataSearch.size == 0)
                         view.findViewById<TextView>(R.id.no_game).visibility = View.VISIBLE
                     else view.findViewById<TextView>(R.id.no_game).visibility = View.GONE

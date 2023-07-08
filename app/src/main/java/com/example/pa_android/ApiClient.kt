@@ -79,4 +79,14 @@ object ApiClient {
     suspend fun listConversation(userId: String): JsonArray {
         return api.getListConversation(userId).await()
     }
+
+    suspend fun listClassementGame(id: Int): JsonObject {
+        return api.getListClassement(id).await()
+    }
+    suspend fun infoClassementGameUser(idUser: String, idGame : Int): JsonObject {
+        return api.getInfoClassementGameUser(idUser, idGame).await()
+    }
+    suspend fun listClassementGameUser(idUser: String): JsonObject {
+        return api.getListClassementUser(idUser).await()
+    }
 }

@@ -103,14 +103,19 @@ class GameFragment : Fragment() {
         val dataSearch = mutableListOf<Game>()
         GlobalScope.launch(Dispatchers.Default) {
             try {
-                val response = ApiClient.listGames()
-                println("responsedddddddddddd "+response)
-                for (game in response.get("games").asJsonArray) {
-                    val it = game.asJsonObject
+                val response = ApiClient.listClassementGameUser(user.user.id)
+                for (jsonElement in response.get("rankings").asJsonArray) {
+                    val it = jsonElement.asJsonObject
                     dataSearch.add(
                         Game(
-                            it.get("id").asInt, it.get("miniature").asString, it.get("name").asString,
-                            it.get("description").asString,it.get("minPlayers").asInt,it.get("maxPlayers").asInt
+                            it.get("game").asJsonObject.get("id").asInt,
+                            it.get("game").asJsonObject.get("miniature").asString,
+                            it.get("game").asJsonObject.get("name").asString,
+                            it.get("game").asJsonObject.get("description").asString,
+                            it.get("game").asJsonObject.get("minPlayers").asInt,
+                            it.get("game").asJsonObject.get("maxPlayers").asInt,
+                            it.get("score").asInt,
+                            it.get("id").asInt
                         )
                     )
                 }
