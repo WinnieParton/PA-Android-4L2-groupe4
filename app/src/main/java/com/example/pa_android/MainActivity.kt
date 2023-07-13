@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.projetfinaljeu.ApiClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -84,18 +85,8 @@ fun TextView.makeBoldText(text: String) {
     setText(spannable)
 }
 
-fun TextView.applyUnderlineTextPart(text: String) {
-    val spannable = SpannableString(text)
-    spannable.setSpan(UnderlineSpan(), 0, text.indexOf(':'), 0)
-    setText(spannable)
-}
-
-fun getCurrentLocalDate(): Date {
-    val calendar = Calendar.getInstance()
-    calendar.time = Date()
-    calendar.set(Calendar.HOUR_OF_DAY, 0)
-    calendar.set(Calendar.MINUTE, 0)
-    calendar.set(Calendar.SECOND, 0)
-    calendar.set(Calendar.MILLISECOND, 0)
-    return calendar.time
+fun getCurrentFormattedDate(): String {
+    val currentDate = Calendar.getInstance().time
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+    return dateFormat.format(currentDate)
 }

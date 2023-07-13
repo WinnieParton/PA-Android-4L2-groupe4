@@ -14,10 +14,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private val api = Retrofit.Builder()
-        .baseUrl("http:/192.168.1.99:8080/")
+        .baseUrl("http://192.168.1.4:8080/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(createOkHttpClient())
+        .build()
+        .create(ApiInterface::class.java)
+
+    private val api1 = Retrofit.Builder()
+        .baseUrl("http://192.168.1.4:8080/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
         .create(ApiInterface::class.java)
     private lateinit var sharedPreferences: SharedPreferences
@@ -37,15 +44,15 @@ object ApiClient {
             .build()
     }
 
-    public fun getTokenFromLocalStorage(): String? {
+    fun getTokenFromLocalStorage(): String? {
         return sharedPreferences.getString("token", null)
     }
-   suspend fun login(data: LoginData): JsonObject {
-        return api.postLogin(data).await()
-   }
+    suspend fun login(data: LoginData): JsonObject {
+        return api1.postLogin(data).await()
+    }
 
     suspend fun signup(data: SignupData): JsonObject {
-        return api.postSignup(data).await()
+        return api1.postSignup(data).await()
     }
 
     suspend fun researchByName(userId: String, textsearch: String): JsonArray {
@@ -75,7 +82,6 @@ object ApiClient {
     suspend fun listGames(): JsonObject {
         return api.getGames().await()
     }
-
     suspend fun listConversation(userId: String): JsonArray {
         return api.getListConversation(userId).await()
     }
@@ -88,5 +94,11 @@ object ApiClient {
     }
     suspend fun listClassementGameUser(idUser: String): JsonObject {
         return api.getListClassementUser(idUser).await()
+    }
+    suspend fun listChatInConversation(userId: String, userIdReceive: String): JsonArray {
+        return api.getPrivateMessage(userId, userIdReceive).await()
+    }
+    suspend fun postSendMessage(chatData: Chat): Void {
+        return api.postSendMessage(chatData).await()
     }
 }
