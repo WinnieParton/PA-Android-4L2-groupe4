@@ -1,5 +1,6 @@
 package com.example.pa_android
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -22,6 +23,7 @@ import okhttp3.Request
 import okhttp3.WebSocket
 import org.json.JSONObject
 import android.util.Log
+import android.view.MotionEvent
 import com.example.projetfinaljeu.ApiClient
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -46,24 +48,36 @@ class ChatFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<Button>(R.id.send_button).setOnClickListener {
+        val passwordEditText = view.findViewById<EditText>(R.id.message_text)
+        passwordEditText.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val drawable = passwordEditText.compoundDrawablesRelative[2] // Index 2 is for end drawable
+                if (drawable != null && event.rawX >= passwordEditText.right - drawable.bounds.width()) {
             val message = view.findViewById<EditText>(R.id.message_text).text.toString()
             sendToPrivateChat(Chat(chat.chatInfo.senderUser, chat.chatInfo.receiverUser,
-                message,chat.chatInfo.senderName, chat.chatInfo.receiverName, chat.chatInfo.receiverName,
+                message,chat.chatInfo.senderName, chat.chatInfo.receiverName,
+                chat.chatInfo.name,
                 "UNREAD",getCurrentFormattedDate(),true ))
-            view.findViewById<EditText>(R.id.message_text).text.clear()
+                    view.findViewById<EditText>(R.id.message_text).text.clear()
+                    true
+                } else {
+                    false
+                }
+
+            } else {
+                false
+            }
         }
+
         countDownTimer = object : CountDownTimer(1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 // Do nothing on each tick
             }
 
             override fun onFinish() {
-                // Code to run after 1 second
-                println("This will run after 1 second!")
                 chatDataList.clear()
                 GlobalScope.launch(Dispatchers.Default) {
                     try {
@@ -106,6 +120,7 @@ class ChatFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as AppCompatActivity?)?.supportActionBar?.title = chat.chatInfo.receiverName
     }
     private fun getChat(view: View, chatDataList: List<Chat>) {
         rv = view.findViewById(R.id.chat_view)

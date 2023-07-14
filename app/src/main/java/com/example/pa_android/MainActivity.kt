@@ -87,6 +87,6 @@ fun TextView.makeBoldText(text: String) {
 
 fun getCurrentFormattedDate(): String {
     val currentDate = Calendar.getInstance().time
-    val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.FRANCE)
     return dateFormat.format(currentDate)
 }

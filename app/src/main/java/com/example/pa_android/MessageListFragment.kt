@@ -209,19 +209,23 @@ class MessageListFragment(user: User) : Fragment() {
         // Add action to navigate
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToChatFragment(Chat(userInfo.id.toInt(),
-                if(chat.send)  chat.receiverUser else chat.senderUser,
+                if(chat.send)  chat.senderUser else chat.receiverUser,
                 "",
                 if(chat.send)  chat.senderName else chat.receiverName,
                 if(chat.send)  chat.receiverName else chat.senderName,
-                if(chat.send)  chat.receiverName else chat.senderName,
+                if(chat.send)  chat.senderName else chat.receiverName,
                 "UNREAD", "", true), userInfo)
         )
     }
 
     private val listenerUser = UsersAdapter.OnClickListener { us, status ->
         findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToChatFragment(Chat(userInfo.id.toInt(), us.id.toInt(),
-                "", userInfo.name, us.name, us.name, "UNREAD", "", true), userInfo)
+            HomeFragmentDirections.actionHomeFragmentToChatFragment(Chat(userInfo.id.toInt(),
+                us.id.toInt(),
+                "",
+                userInfo.name,
+                us.name, us.name, "UNREAD",
+                "", true), userInfo)
         )
     }
 }

@@ -27,7 +27,7 @@ class ChatsAdapter(
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        holder.updateView(chats[position], type, chats, position)
+        holder.updateView(chats[position], type)
 
         if (type == "listchat")
             holder.itemView.findViewById<CardView>(R.id.item_chat).setOnClickListener {

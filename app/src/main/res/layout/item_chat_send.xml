@@ -17,11 +17,24 @@
         android:textColor="@color/white"
         android:layout_marginTop="15dp"
         android:id="@+id/text_send"
+        android:textSize="18sp"
         />
+    <TextView
+        android:id="@+id/dateTimeSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="10/06/2022 10:30 PM"
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toBottomOf="@+id/text_send" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/text_send"
+        app:layout_constraintTop_toBottomOf="@+id/dateTimeSend"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingHorizontal="15dp"
         android:paddingVertical="10dp"
@@ -31,4 +44,15 @@
         android:layout_marginBottom="25dp"
         android:id="@+id/text_receive"
     />
+    <TextView
+        android:id="@+id/dateTimeReceive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="10/06/2022 10:30 PM"
+        android:textAlignment="textStart"
+        app:layout_constraintTop_toBottomOf="@+id/text_receive" />
 </androidx.constraintlayout.widget.ConstraintLayout>
