@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private val api = Retrofit.Builder()
-        .baseUrl("http://192.168.1.4:8080/")
+        .baseUrl("https://pa-backend.moneld.me/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(createOkHttpClient())
@@ -22,7 +22,7 @@ object ApiClient {
         .create(ApiInterface::class.java)
 
     private val api1 = Retrofit.Builder()
-        .baseUrl("http://192.168.1.4:8080/")
+        .baseUrl("https://pa-backend.moneld.me/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
